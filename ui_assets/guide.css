@@ -20,26 +20,19 @@ h2 { font-family:var(--guide-serif)!important; letter-spacing:-.025em; }
 .guide-intro h1 span { color:var(--guide-tea); }
 .guide-intro p { color:#526458;margin:.8rem 0 .5rem;font-size:1rem; }
 .st-key-guide_profile details { border-color:var(--guide-line);background:#f4f4eb; }
-.st-key-area_entry [role=radiogroup] { display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem; }
-.st-key-area_entry [role=radiogroup] > label {
-  position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;box-sizing:border-box;
-  width:100%;margin:0!important;padding:1.25rem 43% 1.25rem 1.35rem!important;min-height:185px;
-  border:1px solid #dfcfbc;border-radius:18px;background:#f2e6d6;color:#382f25;cursor:pointer;
+.st-key-area_entry .stButton button {
+  position:relative;overflow:hidden;box-sizing:border-box;min-height:185px;
+  padding:1.25rem 44% 2.5rem 1.35rem;border:1px solid #dfcfbc;border-radius:18px;
+  justify-content:flex-start;text-align:left;background:#f2e6d6;color:#382f25;
 }
-.st-key-area_entry [role=radiogroup] > label:nth-child(2) { background:#e8efdf;border-color:#cbd8bd;color:var(--guide-ink); }
-.st-key-area_entry [role=radiogroup] > label:before { content:"";position:absolute;z-index:-1;inset:0 0 0 auto;width:42%;background-image:url(data:image/webp;base64,__FOOD_PHOTO__);background-size:200% 100%;background-position:left center; }
-.st-key-area_entry [role=radiogroup] > label:nth-child(2):before { background-position:right center; }
-.st-key-area_entry [role=radiogroup] > label:after { content:"→";position:absolute;left:1.35rem;bottom:1rem;font:600 1.2rem/1 system-ui; }
-.st-key-area_entry [role=radiogroup] > label:focus-within { outline:3px solid var(--guide-tea);outline-offset:2px; }
-.st-key-area_entry [role=radiogroup] > label:hover { border-color:var(--guide-tea);box-shadow:0 3px 12px #24463515; }
-.st-key-area_entry [role=radiogroup] > label > div:first-of-type { position:absolute;width:1px;height:1px;overflow:hidden;opacity:0; }
-.st-key-area_entry [role=radiogroup] > label > div:last-of-type { padding:0!important;margin:0 0 1.35rem!important;min-width:0; }
-.st-key-area_entry [role=radiogroup] > label p { margin:0;font-size:1.6rem;line-height:1.3;font-family:var(--guide-serif);font-weight:700;color:inherit; }
-.st-key-area_entry [role=radiogroup] > label [data-testid=stCaptionContainer] p,
-.st-key-area_entry [role=radiogroup] > label [data-testid=stCaptionContainer],
-.st-key-area_entry [role=radiogroup] > label > div:last-of-type > div:nth-child(2) p { font:400 .85rem/1.55 "PingFang SC","Microsoft YaHei",sans-serif;margin-top:.35rem;color:#455247; }
+.st-key-area_entry .st-key-enter_food button {background:#e8efdf;border-color:#cbd8bd;color:var(--guide-ink);}
+.st-key-area_entry button img {position:absolute;right:0;top:0;width:42%;height:100%;max-height:none;max-width:none;object-fit:cover;margin:0;}
+.st-key-area_entry button strong {display:block;margin-bottom:.35rem;color:var(--guide-ink);font:700 1.6rem/1.3 var(--guide-serif);}
+.st-key-area_entry button p {font:400 .9rem/1.5 "PingFang SC","Microsoft YaHei",sans-serif;color:#455247;text-align:left;}
+.st-key-area_entry button::after {content:"→";position:absolute;left:1.35rem;bottom:1rem;font:600 1.2rem/1 system-ui;}
+.st-key-area_entry button:focus-visible {outline:3px solid var(--guide-tea);outline-offset:2px;}
+.st-key-area_entry button:hover {border-color:var(--guide-tea);box-shadow:0 3px 12px #24463515;}
 .st-key-area_switch [role=radiogroup] { gap:.85rem; }
-.st-key-area_switch [role=radiogroup] > label > div:last-of-type > div:nth-child(2) {display:none;}
 .st-key-tea_functions [role=radiogroup],.st-key-packaged_functions [role=radiogroup] {display:grid!important;grid-auto-columns:1fr;grid-auto-flow:column;gap:5px!important;}
 :is(.st-key-tea_functions,.st-key-packaged_functions) [role=radiogroup]>label {min-height:42px;padding:.5rem .3rem!important;align-items:center!important;justify-content:center;margin:0!important;border-radius:9px;border:1px solid var(--guide-line);}
 :is(.st-key-tea_functions,.st-key-packaged_functions) [role=radiogroup]>label:has(input:checked) {background:#205541;border-color:#205541;}
@@ -68,9 +61,8 @@ h2 { font-family:var(--guide-serif)!important; letter-spacing:-.025em; }
   [data-testid=stMainBlockContainer] {padding:3.9rem 1rem 4rem;}
   .guide-intro {margin:.8rem 0 .1rem;}
   .guide-intro p {margin:.55rem 0 .2rem;}
-  .st-key-area_entry [role=radiogroup] {grid-template-columns:1fr;gap:.65rem;}
-  .st-key-area_entry [role=radiogroup]>label {min-height:126px;padding:.85rem 38% .85rem 1.15rem!important;}
-  .st-key-area_entry [role=radiogroup]>label:before {width:36%;}
-  .st-key-area_entry [role=radiogroup]>label:after {left:1.15rem;bottom:.75rem;}
+  .st-key-area_entry .stButton button {min-height:126px;padding:.85rem 39% 2.1rem 1.15rem;}
+  .st-key-area_entry button img {width:36%;}
+  .st-key-area_entry button::after {left:1.15rem;bottom:.75rem;}
   .st-key-tea_functions [role=radiogroup] {grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));}
 }

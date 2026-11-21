@@ -5,7 +5,7 @@ from urllib.parse import urlsplit
 import pandas as pd
 import streamlit as st
 
-from guide_ui import home_heading, masthead, portion_html, stylesheet
+from guide_ui import home_entries, home_heading, masthead, portion_html, stylesheet
 from nutrition import (
     Basis, CATEGORIES, EXPLANATIONS, NUTRIENTS, FoodLabel, calculate_bmi, label_from_payload,
     portion_reference, review_food, scale_nutrients,
@@ -407,16 +407,16 @@ def main() -> None:
         with st.expander("我的饮食与选购偏好（选填）", icon=":material/tune:"):
             flags, age, bmi = profile()
             prefs = profile_panel()
-    with st.container(key="area_entry" if landing else "area_switch"):
-        area = st.radio("选择食品专区", ["现制奶茶", "预包装食品"], index=None, horizontal=True,
-                        captions=["杯贴、订单或品牌营养卡，也可输入茶饮名称。",
-                                  "食品包装、背标、价签或货架，也可手填标签。"],
-                        key="food_area", label_visibility="collapsed", width="stretch")
-    if area is None:
+    if landing:
+        with st.container(key="area_entry"):
+            home_entries()
         with st.container(key="quick_demo"):
             st.markdown("**手边没有照片？**")
             st.button("试一杯伯牙绝弦", icon=":material/arrow_forward:", key="guide_demo", on_click=start_tea_example)
         return
+    with st.container(key="area_switch"):
+        area = st.radio("选择食品专区", ["现制奶茶", "预包装食品"], key="food_area",
+                        horizontal=True, label_visibility="collapsed", width="stretch")
     settings = VisionSettings(setting("LING_API_KEY"), setting("LING_BASE_URL", "https://api.ant-ling.com/v1"),
                               setting("LING_MODEL", "Ling-3.2-flash"),
                               direct_connection=setting("LING_DIRECT_CONNECTION").lower() == "true")

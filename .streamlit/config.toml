@@ -7,6 +7,7 @@ textColor = "#23352D"
 
 [server]
 maxUploadSize = 8
+enableStaticServing = true
 
 [browser]
 gatherUsageStats = false

@@ -1,10 +1,32 @@
+from pathlib import Path
+import re
 import unittest
+
+from PIL import Image
 
 from guide_ui import portion_html
 from test_app import open_app
 
 
 class GuideUITests(unittest.TestCase):
+    def test_home_has_two_distinct_photos_inside_the_navigation_buttons(self):
+        app = open_app(None)
+        photos = set()
+        for key, area in (("enter_tea", "现制奶茶"), ("enter_food", "预包装食品")):
+            button = app.button(key=key)
+            self.assertIn(area, button.label)
+            match = re.search(r"!\[[^\]]*\]\(app/(static/[\w-]+\.webp)\)", button.label)
+            self.assertIsNotNone(match)
+            path = Path(__file__).resolve().parents[1] / match[1]
+            with Image.open(path) as image:
+                image.load()
+                self.assertGreaterEqual(min(image.size), 300)
+            photos.add(path.read_bytes())
+            button.click().run()
+            self.assertEqual(app.radio(key="food_area").value, area)
+            app.button(key="guide_home").click().run()
+        self.assertEqual(len(photos), 2)
+
     def test_home_example_switches_area_and_preserves_optional_profile_on_return(self):
         app = open_app(None)
         app.number_input(key="person_age").set_value(24).run()
@@ -14,9 +36,9 @@ class GuideUITests(unittest.TestCase):
         self.assertEqual(app.text_input(key="tea.name").value, "伯牙绝弦")
         self.assertTrue(any('class="tea-energy"' in row.proto.body for row in app.get("html")))
         app.button(key="guide_home").click().run()
-        self.assertIsNone(app.radio(key="food_area").value)
+        self.assertTrue(app.button(key="enter_food"))
         self.assertEqual(app.number_input(key="person_age").value, 24)
-        app.radio(key="food_area").set_value("预包装食品").run()
+        app.button(key="enter_food").click().run()
         self.assertFalse(app.exception)
         self.assertTrue(app.button(key="load_demo"))
 

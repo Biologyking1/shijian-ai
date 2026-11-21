@@ -67,9 +67,9 @@ class TeaLookupTests(unittest.TestCase):
 
     def test_home_and_all_tea_routes_work_as_guest(self):
         app = open_app(None)
-        self.assertIsNone(app.radio(key="food_area").value)
+        self.assertTrue(app.button(key="enter_tea"))
         self.assertFalse(app.get("file_uploader"))
-        app.radio(key="food_area").set_value("现制奶茶").run()
+        app.button(key="enter_tea").click().run()
         self.assertTrue(app.text_input(key="tea.brand"))
         for route in ["DIY 点单", "比较与推荐", "个人茶饮账本", "查一杯奶茶"]:
             app.radio(key="tea.route").set_value(route).run()

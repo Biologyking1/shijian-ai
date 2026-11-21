@@ -177,7 +177,7 @@ class TeaDecisionTests(unittest.TestCase):
     def test_real_catalogue_size_change_and_grade_ranking_with_entered_prices(self):
         from tea_catalog import CATALOG
         app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"), default_timeout=15).run()
-        app.radio(key="food_area").set_value("现制奶茶").run()
+        app.button(key="enter_tea").click().run()
         app.radio(key="tea.route").set_value("DIY 点单").run()
         records = [r for r in CATALOG if r["brand"] == "清心福全" and r["name"] == "鲜奶茶"]
         medium = next(r for r in records if r["size"] == "中杯")
