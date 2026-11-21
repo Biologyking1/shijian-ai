@@ -4,6 +4,8 @@
 
 点击照片卡片即可进入专区。手边没有照片时，点「试读一瓶柠檬茶的标签」可直接用演示数据比较半瓶和整瓶的摄入量。已有食品时，首页提供「继续查看我的食品」。也可点「试一杯伯牙绝弦」查看收录配方的等级和每杯能量。
 
+在食品的「食用量与建议」中，展开「猜一猜」可先估算半包的摄入量，再看标签上的原数与换算过程。包装单位不匹配时，可用两倍标签份量出题。有同杯型、同温度且能量已披露的甜度配方时，奶茶查询和 DIY 结果也可竞猜每杯能量怎么变。所有问题都可跳过。系统开启「减少动态效果」时，新增的切换、展开和图表动效自动关闭。
+
 全站视觉在 Streamlit 中适配自 Nova Studio 的免费健康模板 Chard。首页横幅为摄影师 ha ha 拍摄的超市食品货架，按 Pexels 许可用于本项目。[Framer 模板](https://www.framer.com/marketplace/templates/chard/) · [模板设计指南](https://chard.framer.website/design-system) · [货架原片](https://www.pexels.com/photo/shelves-in-grocery-store-16211537/) · [照片许可](https://www.pexels.com/license/)
 
 ## 现制奶茶

@@ -8,6 +8,7 @@ import streamlit as st
 
 from guide_ui import portion_html
 from market_layout import AREAS, area_heading, home_entries, home_heading, masthead
+from result_challenges import portion_challenge
 from nutrition import (
     Basis, CATEGORIES, EXPLANATIONS, NUTRIENTS, FoodLabel, calculate_bmi, label_from_payload,
     portion_reference, review_food, scale_nutrients,
@@ -333,6 +334,7 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
     if age is not None and age < 18:
         st.caption("未成年人可查看标签解读和份量换算。")
 
+    portion_challenge(label, review.focus)
     st.markdown("**吃多少**")
     if label.label_state == "prepared":
         st.info("这些数据按冲调后的状态标示，请输入冲调后实际吃或喝的量。")
@@ -440,6 +442,12 @@ def main() -> None:
     with st.container(key="packaged_functions"):
         route = st.radio("预包装食品 · 选择功能", ["单品解读", "多款比较", "货架购物助手"], horizontal=True,
                          key="work_route", width="stretch")
+    route_key = {"单品解读": "single", "多款比较": "compare", "货架购物助手": "shelf"}[route]
+    with st.container(key="guide_view_food_" + route_key):
+        packaged_view(route, settings, flags, age, bmi, prefs)
+
+
+def packaged_view(route, settings, flags, age, bmi, prefs):
     basket = st.session_state.setdefault("basket", {})
     if route == "单品解读":
         current = st.session_state.get("single_product")

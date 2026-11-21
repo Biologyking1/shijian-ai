@@ -518,11 +518,13 @@ def tea_home(settings, prefs, flags):
                          horizontal=True, width="stretch", key="tea.route")
     records = [*catalog.CATALOG, *st.session_state.get("tea.custom", {}).values()]
     st.session_state["tea.records"] = records
-    if route == "查一杯奶茶":
-        tea_lookup(settings, prefs, flags)
-    elif route == "DIY 点单":
-        render_simulator(records, prefs, flags, initial=st.session_state.pop("tea.initial_order", None))
-    elif route == "比较与推荐":
-        render_comparison(prefs, flags)
-    else:
-        render_ledger()
+    route_key = {"查一杯奶茶": "lookup", "DIY 点单": "diy", "比较与推荐": "compare", "个人茶饮账本": "ledger"}[route]
+    with st.container(key="guide_view_tea_" + route_key):
+        if route == "查一杯奶茶":
+            tea_lookup(settings, prefs, flags)
+        elif route == "DIY 点单":
+            render_simulator(records, prefs, flags, initial=st.session_state.pop("tea.initial_order", None))
+        elif route == "比较与推荐":
+            render_comparison(prefs, flags)
+        else:
+            render_ledger()

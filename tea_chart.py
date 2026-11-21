@@ -5,6 +5,8 @@ from math import ceil, floor, isfinite, log10
 
 import streamlit as st
 
+from result_challenges import sweetness_challenge
+
 
 def _group_key(record):
     fields = ("brand", "name", "kind", "region", "size", "temp", "scope", "source")
@@ -82,10 +84,12 @@ _CHART_STYLE = """
 
 
 def render_energy_chart(selected, variants):
-    values = [r["kcal"] for r in variants if _number(r.get("kcal"))]
-    if len(values) < 2:
+    published = [r for r in variants if _number(r.get("kcal"))]
+    if len(published) < 2:
         return
-    ceiling = _axis_ceiling(max(values))
+    if _number(selected.get("kcal")):
+        sweetness_challenge(selected, published)
+    ceiling = _axis_ceiling(max(r["kcal"] for r in published))
     different_dates = len({row.get("date") for row in variants}) > 1
     bars = []
     for row in variants:
