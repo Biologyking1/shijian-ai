@@ -334,7 +334,6 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
     if age is not None and age < 18:
         st.caption("未成年人可查看标签解读和份量换算。")
 
-    portion_challenge(label, review.focus)
     st.markdown("**吃多少**")
     if label.label_state == "prepared":
         st.info("这些数据按冲调后的状态标示，请输入冲调后实际吃或喝的量。")
@@ -343,6 +342,7 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
     if portion:
         scaled = scale_nutrients(label, *portion) if portion[0] else dict.fromkeys(label.nutrients, 0)
         pack = label.package_size if label.package_unit == portion[1] and label.label_state != "prepared" else None
+        portion_challenge(label, review.focus, portion_reference(label))
         st.html(portion_html(*portion, pack, scaled))
         if "sugar" in scaled:
             st.caption(f"这次摄入糖 {scaled['sugar']:g} 克，约相当于 {scaled['sugar'] / 4:.2f}".rstrip("0").rstrip(".")

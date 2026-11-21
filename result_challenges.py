@@ -26,8 +26,7 @@ def _amount(value):
     return f"{value:.3f}".rstrip("0").rstrip(".")
 
 
-def portion_challenge(label, focus=()):
-    reference = nutrition.portion_reference(label)
+def portion_challenge(label, focus, reference):
     if not reference or not label.nutrients:
         return
     base, unit = reference
@@ -37,8 +36,10 @@ def portion_challenge(label, focus=()):
         return
     scaled = nutrition.scale_nutrients(label, quantity, unit)
     for nutrient in dict.fromkeys((*focus, "sugar", "carbs", "sodium", "energy", *label.nutrients)):
-        value = scaled.get(nutrient)
-        if value is None or not isfinite(value) or value < .002:
+        if nutrient not in scaled:
+            continue
+        value = scaled[nutrient]
+        if not isfinite(value) or value < .002:
             continue
         name, value_unit = nutrition.NUTRIENTS[nutrient]
         description = ("喝掉一半" if label.category == "drink" else "吃掉一半") if half_pack else "两倍标签份量"

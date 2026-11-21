@@ -3,7 +3,7 @@ from dataclasses import replace
 from enum import Enum
 from unittest.mock import patch
 
-from nutrition import label_from_payload
+from nutrition import label_from_payload, portion_reference
 from result_challenges import portion_challenge
 from test_app import open_app
 
@@ -40,15 +40,18 @@ class ResultChallengeTests(unittest.TestCase):
         with patch("result_challenges._guess") as render:
             for patch_data in ({"basis": "unknown"}, {"nutrients": {}}, {"nutrients": {"sugar": 0}},
                                {"basis": "per_serving", "serving_size": 800_000, "serving_unit": "g"}):
-                portion_challenge(label_from_payload({**base, **patch_data}))
+                label = label_from_payload({**base, **patch_data})
+                portion_challenge(label, (), portion_reference(label))
             render.assert_not_called()
             for patch_data in ({"label_state": "prepared"}, {"package_unit": "g"},
                                {"package_size": .001}, {"package_size": None}):
-                portion_challenge(label_from_payload({**base, **patch_data}))
+                label = label_from_payload({**base, **patch_data})
+                portion_challenge(label, (), portion_reference(label))
                 _, prompt, _, answer, _, _ = render.call_args.args
                 self.assertIn("200 mL", prompt)
                 self.assertEqual(answer, "24 mg")
-            portion_challenge(label_from_payload({**base, "nutrients": {"sugar": 4, "sodium": 12}}), ["sodium"])
+            label = label_from_payload({**base, "nutrients": {"sugar": 4, "sodium": 12}})
+            portion_challenge(label, ["sodium"], portion_reference(label))
             self.assertIn("钠", render.call_args.args[1])
             self.assertEqual(render.call_args.args[3], "30 mg")
 
@@ -57,7 +60,8 @@ class ResultChallengeTests(unittest.TestCase):
         label = label_from_payload({"basis": "per_100_ml", "label_state": "as_sold", "package_size": 500,
                                     "package_unit": "mL", "nutrients": {"carbs": 8}})
         with patch("result_challenges._guess") as render:
-            portion_challenge(replace(label, basis=previous_basis.MILLILITERS))
+            previous = replace(label, basis=previous_basis.MILLILITERS)
+            portion_challenge(previous, (), portion_reference(previous))
             render.assert_called_once()
             self.assertEqual(render.call_args.args[3], "20 g")
 
