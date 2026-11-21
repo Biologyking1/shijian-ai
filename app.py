@@ -8,7 +8,7 @@ import streamlit as st
 
 from guide_ui import portion_html
 from market_layout import AREAS, area_heading, home_entries, home_heading, masthead
-from result_challenges import portion_challenge
+from portion_game import render_portion_guess
 from nutrition import (
     Basis, CATEGORIES, EXPLANATIONS, NUTRIENTS, FoodLabel, calculate_bmi, label_from_payload,
     portion_reference, review_food, scale_nutrients,
@@ -342,7 +342,7 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
     if portion:
         scaled = scale_nutrients(label, *portion) if portion[0] else dict.fromkeys(label.nutrients, 0)
         pack = label.package_size if label.package_unit == portion[1] and label.label_state != "prepared" else None
-        portion_challenge(label, review.focus, portion_reference(label))
+        render_portion_guess(label, review.focus, portion_reference(label))
         st.html(portion_html(*portion, pack, scaled))
         if "sugar" in scaled:
             st.caption(f"这次摄入糖 {scaled['sugar']:g} 克，约相当于 {scaled['sugar'] / 4:.2f}".rstrip("0").rstrip(".")
