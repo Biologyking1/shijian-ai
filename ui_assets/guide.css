@@ -29,7 +29,7 @@ h2 { font-family:var(--guide-serif)!important; letter-spacing:-.025em; }
 .st-key-area_entry button img {position:absolute;right:0;top:0;width:42%;height:100%;max-height:none;max-width:none;object-fit:cover;margin:0;}
 .st-key-area_entry button strong {display:block;margin-bottom:.35rem;color:var(--guide-ink);font:700 1.6rem/1.3 var(--guide-serif);}
 .st-key-area_entry button [data-testid=stMarkdownContainer] {white-space:normal;text-overflow:clip;}
-.st-key-area_entry button p {font:400 .9rem/1.5 "PingFang SC","Microsoft YaHei",sans-serif;color:#455247;text-align:left;}
+.st-key-area_entry button p {font:400 .9rem/1.5 "PingFang SC","Microsoft YaHei",sans-serif;color:#455247;text-align:left;white-space:normal;}
 .st-key-area_entry button::after {content:"→";position:absolute;left:1.35rem;bottom:1rem;font:600 1.2rem/1 system-ui;}
 .st-key-area_entry button:focus-visible {outline:3px solid var(--guide-tea);outline-offset:2px;}
 .st-key-area_entry button:hover {border-color:var(--guide-tea);box-shadow:0 3px 12px #24463515;}
