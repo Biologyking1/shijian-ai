@@ -1,5 +1,6 @@
 import streamlit as st
 
+from comparison_cards import choose_pair, packaged_nutrition_rows, pair_verdict, render_pair
 from label_knowledge import ALLERGEN_OPTIONS, DIET_OPTIONS, watch_alerts
 from nutrition import NUTRIENTS, FoodLabel
 from shopping import (
@@ -159,6 +160,17 @@ def compare_decisions(labels, prefs) -> None:
     if not results:
         st.info("加入候选食品后即可查看预算、限制及偏好匹配结果。")
         return
+    if len(results) >= 2:
+        names = [r.label.name or "未命名食品" for r in results]
+        indices = choose_pair(names, "shopping.pair")
+        pair = [results[i] for i in indices]
+        weights = active_weights(prefs)
+        goals = prefs["goals"] if "nutrition" in weights else []
+        nutrition_title = GOALS[goals[0]][0] if len(goals) == 1 else "营养目标"
+        states = {"as_sold": "包装原状", "prepared": "冲调后", "unknown": "状态待核对"}
+        render_pair(pair, [names[i] for i in indices], [states[r.label.label_state] for r in pair],
+                    "单包价格", packaged_nutrition_rows(pair, goals), pair_verdict(pair, weights, nutrition_title))
+        st.markdown("**全部候选**")
     by_group: dict[str, list[Decision]] = {}
     for result in results:
         if result.rank is not None:

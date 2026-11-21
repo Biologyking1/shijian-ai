@@ -1,6 +1,7 @@
 """Freshly made tea lookup and review of recipe-specific nutrition evidence."""
 
 from hashlib import sha256
+from html import escape
 from math import isfinite
 from unicodedata import normalize
 from urllib.parse import urlsplit
@@ -8,6 +9,7 @@ from urllib.parse import urlsplit
 import streamlit as st
 
 import tea_catalog as catalog
+from tea_chart import render_energy_chart, sweetness_variants
 from tea_chagee import BRAND as LIVE_BRAND, live_variant, recent_recipe
 from tea_decisions import render_comparison, render_simulator, spec_key
 from tea_ledger import render_ledger
@@ -138,35 +140,72 @@ def _receipt_input(settings):
             st.image(photo)
 
 
-def _show_record(record, prefs, flags):
-    st.subheader(f"{record['brand']} · {record['name']}")
-    st.write(_spec(record))
-    if record.get("region") or record.get("date"):
-        st.caption(" ｜ ".join(str(v) for v in (record.get("region"), record.get("date")) if v))
+def _recipe_summary(record):
+    def metric(field, unit):
+        value = record.get(field)
+        if value is None:
+            return '<span class="tea-unknown">待补</span>'
+        return f'{value:g} <small>{unit}</small>'
+
     grade = record.get("grade") or record.get("estimated_grade")
-    if grade:
-        if record.get("grade"):
-            origin = "用户核对的品牌标示" if record.get("user_record") else "品牌标示"
-        else:
-            origin = "按指标推算"
-        st.metric(f"{origin} · {record.get('grade_scheme') or '营养选择'}", f"{grade} 级")
-        st.write(GRADE_NOTE.get(grade, "请查看来源中的分级说明。"))
-    else:
-        st.info("该规格暂无可核实的营养等级。可在下方补录同款营养卡，查看能否推算。")
+    origin = ("个人核对的标示" if record.get("user_record") else "品牌标示") if record.get("grade") else "按指标推算"
+    grade_name = escape(str(grade)) if grade in GRADE_NOTE else "待核对"
+    mark = grade_name + " 级" if grade in GRADE_NOTE else grade_name
+    help_text = (f"{origin} · {record.get('grade_scheme') or '营养选择'}" if grade in GRADE_NOTE
+                 else "暂无可核实的等级")
+    basis = record.get("value_type") or ("已核对数值" if record.get("user_record") else "参考值")
+    notes = " · ".join(str(record[k]) for k in ("region", "scope", "date") if record.get(k))
+    st.html(f"""
+        <style>
+        .tea-recipe {{background:#f6f4e9;border:1px solid #d4ddcc;border-radius:18px;
+          color:#1d4132;padding:clamp(1rem,3vw,1.55rem);overflow-wrap:anywhere}}
+        .tea-recipe .tea-brand,.tea-recipe .tea-sub {{color:#506353;font-size:.88rem;line-height:1.6}}
+        .tea-recipe .tea-head {{display:flex;justify-content:space-between;gap:1rem;align-items:center}}
+        .tea-recipe h3 {{margin:.2rem 0;padding:0;color:#173e2e;font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.2}}
+        .tea-recipe .tea-grade {{text-align:center;background:#e3ebda;color:#25482d;min-width:4.8rem;
+          padding:.46rem .65rem;border-radius:.85rem;line-height:1.4;font-size:.76rem}}
+        .tea-recipe .tea-grade b {{display:block;font-size:1.55rem}}
+        .tea-recipe .tea-grade[data-grade="C"],.tea-recipe .tea-grade[data-grade="D"]
+          {{background:#f1e4ce;color:#66491b}}
+        .tea-recipe dl {{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;
+          margin:1rem 0 .75rem;border-block:1px solid #d7dece;padding:.85rem 0}}
+        .tea-recipe dt {{font-size:.84rem;color:#4d6153}}
+        .tea-recipe dd {{margin:.15rem 0 0;color:#193f2e;font-size:1.8rem;font-weight:700;line-height:1.24;
+          font-variant-numeric:tabular-nums}}
+        .tea-recipe dd small,.tea-recipe .tea-unknown {{font-size:.94rem;font-weight:550}}
+        .st-key-tea_sweetness_control [role="radiogroup"] {{display:flex;flex-wrap:wrap;gap:.5rem}}
+        .st-key-tea_sweetness_control [role="radiogroup"]>label {{margin:0;padding:.43rem .72rem;
+          min-height:40px;border:1px solid #cbd8c8;border-radius:9px;background:#fffdf7}}
+        .st-key-tea_sweetness_control [role="radiogroup"]>label:has(input:checked)
+          {{background:#e6efde;border-color:#608467;color:#193f2e}}
+        .st-key-tea_sweetness_control [role="radiogroup"]>label:focus-within {{outline:2px solid #245943;outline-offset:2px}}
+        </style>
+        <section class="tea-recipe" aria-label="当前规格营养摘要"><div class="tea-head"><div>
+        <div class="tea-brand">{escape(record['brand'])} · {escape(record.get('kind') or '现制茶饮')}</div>
+        <h3>{escape(record['name'])}</h3><div>{escape(_configuration(record))}</div></div>
+        <div class="tea-grade" data-grade="{grade_name}">营养等级<b>{mark}</b></div></div>
+        <dl><div><dt>每杯能量 · {escape(basis)}</dt><dd>{metric('kcal', 'kcal')}</dd></div>
+        <div><dt>每杯总糖 · {escape(basis)}</dt><dd>{metric('total_sugar', 'g')}</dd></div></dl>
+        <div class="tea-sub">{escape(help_text)}</div><div class="tea-sub">{escape(notes)}</div></section>""")
+
+
+def _show_record(record, prefs, flags, variants):
+    render_energy_chart(record, variants)
+    grade = record.get("grade") or record.get("estimated_grade")
+    if grade in GRADE_NOTE:
+        st.caption(GRADE_NOTE[grade])
     if record.get("grade_reason"):
         st.caption(record["grade_reason"])
     totals = {k: record[k] for k in NUTRIENTS if record.get(k) is not None}
-    if totals:
-        st.write(
-            "每杯"
-            + (record.get("value_type") or ("公开值" if not record.get("user_record") else "数值（按已核对资料）"))
-        )
-        st.table([{"项目": NUTRIENTS[k], "每杯": f"{value:g}"} for k, value in totals.items()])
-    elif record.get("per100"):
-        st.table(
-            [{"项目": NUTRIENTS[k], "每 100 mL": f"{v:g}"} for k, v in record["per100"].items() if k in NUTRIENTS]
-        )
-        st.caption("需有这个配方的实际毫升数，才能换算整杯摄入量。")
+    per100 = record.get("per100") or {}
+    if totals or per100:
+        with st.expander("查看完整营养数据"):
+            if totals:
+                st.table([{"项目": NUTRIENTS[k], "每杯": f"{value:g}"} for k, value in totals.items()])
+            if per100:
+                st.table([{"项目": NUTRIENTS[k], "每 100 mL": f"{v:g}"} for k, v in per100.items() if k in NUTRIENTS])
+                if not totals:
+                    st.caption("需有这个配方的实际毫升数，才能换算整杯摄入量。")
     links = set()
     for key, title in (("source", "查看该规格资料"), ("grade_source", "查看等级依据")):
         url = record.get(key)
@@ -330,7 +369,11 @@ def _card_editor(brand, name, settings, seed):
         st.rerun()
 
 
-def tea_lookup(settings, prefs, flags):
+def _select_sweetness(variant_key, sweetness_key, indices):
+    st.session_state[variant_key] = indices[st.session_state[sweetness_key]]
+
+
+def _query_inputs(settings):
     method = st.radio("如何提供茶饮信息？", ["填写品牌与品名", "拍摄或上传杯贴"], horizontal=True, key="tea.entry")
     if method == "拍摄或上传杯贴":
         _receipt_input(settings)
@@ -373,6 +416,14 @@ def tea_lookup(settings, prefs, flags):
                             live[spec_key(match)] = match
             else:
                 st.info("品牌计算器本次未返回可核实的数据。下方仍可查收录资料或补录营养卡。")
+    return method, brand, name, slip
+
+
+def tea_lookup(settings, prefs, flags):
+    has_query = st.session_state.get("tea.query") == (st.session_state.get("tea.brand"), st.session_state.get("tea.name"))
+    inputs = st.expander("查询饮品或更换完整规格", expanded=not has_query)
+    with inputs:
+        method, brand, name, slip = _query_inputs(settings)
     if st.session_state.get("tea.query") != (brand, name):
         return
     same_slip = method == "拍摄或上传杯贴" and bool(slip)
@@ -391,25 +442,34 @@ def tea_lookup(settings, prefs, flags):
     )
     if records:
         compatible = _order_candidates(slip, records) if same_slip else []
-        if same_slip and compatible:
-            st.caption("已优先列出符合杯贴可读规格的资料。请继续核对适用市场，以及杯贴没有写明的选项。")
-        elif same_slip:
-            st.warning("尚不能把杯贴与具体配方对应。下列是同名饮品的参考资料，所列数值可能与你这杯不同。")
-        else:
-            st.caption("下列资料按市场和配方分别列出。请核对你的杯型、甜度、冰量和小料。")
+        if same_slip:
+            if compatible:
+                st.caption("已优先列出符合杯贴可读规格的资料。请继续核对适用市场，以及杯贴没有写明的选项。")
+            else:
+                st.warning("尚不能把杯贴与具体配方对应。下列是同名饮品的参考资料，所列数值可能与你这杯不同。")
         saved = custom.get(st.session_state.pop("tea.show_saved", None))
         rev = len(records)
         options = compatible + [i for i in range(rev) if i not in compatible]
         key = f"tea.variants.{brand}.{name}.{rev}.{tuple(compatible)}"
         if saved in records:
             st.session_state[key] = records.index(saved)
-        selection = st.selectbox(
+        selection = inputs.selectbox(
             "查看哪个规格的资料？",
             options,
             format_func=lambda i: ("已核对 · " if records[i].get("user_record") else "") + _spec(records[i]),
             key=key,
         )
-        _show_record(records[selection], prefs, flags)
+        selected = records[selection]
+        variants = sweetness_variants(selected, records)
+        _recipe_summary(selected)
+        if variants:
+            indices = {row["sugar"]: records.index(row) for row in variants}
+            sweetness_key = key + ".sweetness"
+            st.session_state[sweetness_key] = selected["sugar"]
+            with st.container(key="tea_sweetness_control"):
+                st.radio("切换同配方甜度", list(indices), horizontal=True, key=sweetness_key,
+                         on_change=_select_sweetness, args=(key, sweetness_key, indices))
+        _show_record(selected, prefs, flags, variants)
     else:
         st.info("资料库尚无这个完整品名的已核实配方。可查看品牌点单页，再补录该杯的营养卡。")
         similar = sorted(
@@ -453,12 +513,9 @@ def tea_lookup(settings, prefs, flags):
 
 
 def tea_home(settings, prefs, flags):
-    route = st.radio(
-        "现制奶茶 · 选择功能",
-        ["查一杯奶茶", "DIY 点单", "比较与推荐", "个人茶饮账本"],
-        horizontal=True,
-        key="tea.route",
-    )
+    with st.container(key="tea_functions"):
+        route = st.radio("现制奶茶 · 选择功能", ["查一杯奶茶", "DIY 点单", "比较与推荐", "个人茶饮账本"],
+                         horizontal=True, width="stretch", key="tea.route")
     records = [*catalog.CATALOG, *st.session_state.get("tea.custom", {}).values()]
     st.session_state["tea.records"] = records
     if route == "查一杯奶茶":

@@ -57,6 +57,20 @@ assert.deepEqual(totals.selected, [row]);
 assert.equal(money(totals.balance), '¥5.10');
 assert.equal(money(-1), '−¥0.01');
 
+// A calendar week starts on Monday and may be clipped at either end of the month.
+const weeks = summarize([
+  {...row, date:'2024-09-01', cents:101}, {...row, date:'2024-09-02', cents:202},
+  {...row, date:'2024-09-08', cents:3}, {...row, date:'2024-09-09', cents:1},
+  {...row, date:'2024-09-30', cents:9}, {...row, date:'2024-10-01', cents:999},
+  {...row, date:'2024-09-08', kind:'income', cents:700},
+], '2024-09').weeks;
+assert.deepEqual(weeks.map(w => [w.start, w.end, w.expense]), [
+  [1,1,101n], [2,8,205n], [9,15,1n], [16,22,0n], [23,29,0n], [30,30,9n],
+]);
+assert.deepEqual(totals.weeks.at(-1), {start:26,end:29,expense:1990n});
+assert.equal(summarize([], '2021-02').weeks.length, 4);
+assert.deepEqual(summarize([row], '').weeks, []);
+
 // Model the IndexedDB event contract, exposing writes only on commit.
 let saved = new Map();
 const db = { transaction(table, mode) {

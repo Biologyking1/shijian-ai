@@ -5,6 +5,7 @@ from urllib.parse import urlsplit
 import pandas as pd
 import streamlit as st
 
+from guide_ui import home_heading, masthead, portion_html, stylesheet
 from nutrition import (
     Basis, CATEGORIES, EXPLANATIONS, NUTRIENTS, FoodLabel, calculate_bmi, label_from_payload,
     portion_reference, review_food, scale_nutrients,
@@ -51,7 +52,7 @@ def share_app(url: str) -> None:
         return
     if parsed.scheme != "https" or not parsed.hostname or parsed.username:
         return
-    with st.expander("分享网页 · 二维码"):
+    with st.popover("分享", icon=":material/qr_code_2:"):
         st.link_button("打开分享链接", url)
         try:
             import qrcode
@@ -66,8 +67,7 @@ def share_app(url: str) -> None:
 
 
 def profile() -> tuple[set[str], int | None, float | None]:
-    st.header("个人信息（选填）")
-    st.caption("愿意填写时，请按实际情况选择，方便我们提醒你关注相关成分。也可以直接选择下方入口。个人信息仅用于本次会话。")
+    st.caption("按实际情况填写后，解读会突出你关注的成分。个人信息仅用于本次会话。")
     answers = st.session_state.setdefault("personal_answers", {})
     for key, saved in answers.items():
         if key not in st.session_state:
@@ -114,7 +114,7 @@ def save_camera_shot() -> None:
 
 
 def label_input(vision_settings: VisionSettings) -> None:
-    st.header("2. 上传照片或录入标签")
+    st.header("上传照片或录入标签")
     st.caption("可以分别拍摄营养成分表、配料表和包装正面。照片须来自同一款食品。")
     images = st.file_uploader("从相册或文件选图", type=["jpg", "jpeg", "png", "webp"], accept_multiple_files=True)
     shots = st.session_state.setdefault("camera_photos", [])
@@ -238,6 +238,8 @@ def label_editor(item: Product, *, shopping=False) -> None:
         st.session_state.active_label = label
         st.session_state.pop("portion", None)
         st.session_state.pop("portion_choice", None)
+        if not shopping:
+            st.rerun()
 
 
 def portion_value(label: FoodLabel) -> tuple[float, str] | None:
@@ -258,13 +260,21 @@ def portion_value(label: FoodLabel) -> tuple[float, str] | None:
         if label.package_size >= 0.002:
             options[f"半包 · {label.package_size / 2:g} {unit_label}"] = label.package_size / 2
         options[f"整包 · {label.package_size:g} {unit_label}"] = label.package_size
+        with st.container(horizontal=True, key="portion_presets"):
+            for title in options:
+                if title.startswith(("半包", "整包")):
+                    prefix = title.split(" · ")[0]
+                    key = "dose_half" if prefix == "半包" else "dose_full"
+                    st.button(title, key=key, on_click=set_portion, args=(title, options[title]))
     if len(options) > 1:
-        st.selectbox("快速选择份量", options.keys(), index=None, key="portion_choice",
-                     placeholder="也可以直接输入下方份量", on_change=apply_quick_portion, args=(options,))
+        with st.expander("选择包装标示的份量"):
+            st.selectbox("快速选择份量", options.keys(), index=None, key="portion_choice",
+                         placeholder="请选择份量", on_change=apply_quick_portion, args=(options,))
     if "portion" not in st.session_state:
         st.session_state.portion = float(amount)
     result = st.number_input(f"这次吃多少（{unit_label}）", min_value=0.0, max_value=1_000_000.0, value=None,
-                             step=0.1 if unit == "份" else 1.0, format="%.3f", key="portion")
+                             step=0.1 if unit == "份" else 1.0, format="%.3f", key="portion",
+                             on_change=st.session_state.update, args=({"portion_choice": None},))
     upper = float(max(label.package_size if package_matches else 2 * amount, result or 0, 1))
     st.session_state.drag_portion = float(result or 0)
     st.slider(f"拖动调整食用量（{unit_label}）", 0.0, upper, step=0.1 if unit == "份" or upper < 10 else 1.0,
@@ -287,6 +297,11 @@ def apply_quick_portion(options: dict[str, float]) -> None:
         st.session_state.portion = options[choice]
 
 
+def set_portion(title, amount):
+    st.session_state.portion_choice = title
+    st.session_state.portion = float(amount)
+
+
 def open_intake_calculator(item: Product) -> None:
     st.session_state.single_product = item
     st.session_state.work_route = "单品解读"
@@ -301,7 +316,7 @@ def format_nutrient(value: float, unit: str) -> str:
 
 
 def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float | None, prefs: dict) -> None:
-    st.header("3. 看解读和食用建议")
+    st.header("这次吃进去多少？")
     st.subheader(label.name or "当前食品")
     review = review_food(label, flags)
     blocked, unknown = restriction_check(label, prefs)
@@ -323,6 +338,8 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
     scaled = {}
     if portion:
         scaled = scale_nutrients(label, *portion) if portion[0] else dict.fromkeys(label.nutrients, 0)
+        pack = label.package_size if label.package_unit == portion[1] and label.label_state != "prepared" else None
+        st.html(portion_html(*portion, pack, scaled))
         if "sugar" in scaled:
             st.caption(f"这次摄入糖 {scaled['sugar']:g} 克，约相当于 {scaled['sugar'] / 4:.2f}".rstrip("0").rstrip(".")
                        + " 块方糖（每块按 4 克作重量类比，包含食品中天然存在的糖）。")
@@ -366,20 +383,39 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
         st.caption("如已有医生或营养师给出的饮食计划，份量与替代食物请按该计划安排。")
 
 
+def start_tea_example():
+    brand, name = "霸王茶姬", "伯牙绝弦"
+    st.session_state.update({"food_area": "现制奶茶", "tea.route": "查一杯奶茶",
+                             "tea.entry": "填写品牌与品名", "tea.brand": brand, "tea.name": name,
+                             "tea.query": (brand, name)})
+    st.session_state.pop("tea.slip", None)
+
+
 def main() -> None:
-    st.set_page_config(page_title="食鉴 AI", page_icon="🥗", layout="centered")
-    st.title("食鉴 AI")
-    share_app(setting("PUBLIC_APP_URL"))
-    flags, age, bmi = profile()
-    prefs = profile_panel()
-    st.header("选择食品类型")
-    packaged, tea = st.columns(2)
-    packaged.markdown("**预包装食品**")
-    packaged.caption("只接收预包装商品的包装、背标、价签或货架照片，以及对应的商品描述。")
-    tea.markdown("**现制奶茶**")
-    tea.caption("只接收现制茶饮的杯贴、订单或品牌营养卡，以及对应的品牌、品名和点单规格。")
-    area = st.radio("进入哪个专区？", ["预包装食品", "现制奶茶"], index=None, horizontal=True, key="food_area")
+    st.set_page_config(page_title="食鉴 AI", page_icon="🍃", layout="wide")
+    st.html(stylesheet())
+    landing = not st.session_state.get("food_area")
+    with st.container(horizontal=True, horizontal_alignment="distribute", vertical_alignment="center", key="guide_top"):
+        masthead()
+        share_app(setting("PUBLIC_APP_URL"))
+    if landing:
+        home_heading()
+    else:
+        st.button("返回首页", icon=":material/arrow_back:", key="guide_home",
+                  on_click=st.session_state.update, args=({"food_area": None},))
+    with st.container(key="guide_profile"):
+        with st.expander("我的饮食与选购偏好（选填）", icon=":material/tune:"):
+            flags, age, bmi = profile()
+            prefs = profile_panel()
+    with st.container(key="area_entry" if landing else "area_switch"):
+        area = st.radio("选择食品专区", ["现制奶茶", "预包装食品"], index=None, horizontal=True,
+                        captions=["杯贴、订单或品牌营养卡，也可输入茶饮名称。",
+                                  "食品包装、背标、价签或货架，也可手填标签。"],
+                        key="food_area", label_visibility="collapsed", width="stretch")
     if area is None:
+        with st.container(key="quick_demo"):
+            st.markdown("**手边没有照片？**")
+            st.button("试一杯伯牙绝弦", icon=":material/arrow_forward:", key="guide_demo", on_click=start_tea_example)
         return
     settings = VisionSettings(setting("LING_API_KEY"), setting("LING_BASE_URL", "https://api.ant-ling.com/v1"),
                               setting("LING_MODEL", "Ling-3.2-flash"),
@@ -388,15 +424,25 @@ def main() -> None:
         from tea_views import tea_home
         tea_home(settings, prefs, flags)
         return
-    route = st.radio("预包装食品 · 选择功能", ["单品解读", "多款比较", "货架购物助手"], horizontal=True, key="work_route",
-                     captions=["看懂标签，换算食用量", "比较价格、营养和口味", "按预算从现场候选中选购"])
+    with st.container(key="packaged_functions"):
+        route = st.radio("预包装食品 · 选择功能", ["单品解读", "多款比较", "货架购物助手"], horizontal=True,
+                         key="work_route", width="stretch")
     basket = st.session_state.setdefault("basket", {})
     if route == "单品解读":
-        label_input(settings)
+        current = st.session_state.get("single_product")
+        if current and current.confirmed:
+            with st.expander("更换食品或重新上传照片"):
+                label_input(settings)
+        else:
+            label_input(settings)
         item = st.session_state.get("single_product")
         if item is None:
             return
-        label_editor(item)
+        if item.confirmed:
+            with st.expander("查看或修改已核对的标签"):
+                label_editor(item)
+        else:
+            label_editor(item)
         if item.confirmed:
             st.divider()
             focus = st.radio("想查看哪项结果？", ["食用量与建议", "宣传语、配料与过敏原", "购买匹配度"],

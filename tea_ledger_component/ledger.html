@@ -1,24 +1,35 @@
-<section aria-label="茶饮账本">
-  <div class="summary">
-    <div><span>累计结余</span><strong id="balance">—</strong></div>
-    <div><span>所选月支出</span><strong id="expense">—</strong></div>
-    <div><span>所选月收入</span><strong id="income">—</strong></div>
+<section class="ledger" aria-label="茶饮账本">
+  <div class="month-heading">
+    <h4>收支概览</h4>
+    <label>查看月份<input type="month" id="month" required></label>
   </div>
-  <p role="status" aria-live="polite" id="status">正在读取本机账本…</p>
-  <form>
-    <fieldset disabled>
-      <legend>记一笔</legend>
-      <button type="button" id="draft" hidden>带入刚才的点单</button>
-      <div class="inputs">
-        <label>收支类型<select id="kind"><option value="expense">茶饮支出</option><option value="income">收入／退款</option></select></label>
-        <label><span id="amount-label">实付金额（元）</span><input id="amount" inputmode="decimal" required placeholder="0.00" autocomplete="off"></label>
-        <label>日期<input id="date" type="date" required></label>
-        <label class="wide">备注（选填）<input id="note" maxlength="160" placeholder="例如：品牌、饮品或收入来源" autocomplete="off"></label>
-      </div>
-      <button class="primary" type="submit">保存这笔收支</button>
-    </fieldset>
-  </form>
-  <div class="month-heading"><h4>每月明细</h4><label>月份<input type="month" id="month"></label></div>
+  <dl class="summary">
+    <div><dt>所选月支出</dt><dd id="expense">—</dd></div>
+    <div><dt>所选月收入</dt><dd id="income">—</dd></div>
+    <div><dt>累计结余</dt><dd id="balance">—</dd></div>
+  </dl>
+  <div class="ledger-columns">
+    <section class="chart panel" aria-labelledby="chart-heading">
+      <h4 id="chart-heading">每周支出</h4>
+      <p class="caption">按周一至周日汇总，只计算所选月内的支出。</p>
+      <ol id="weeks" aria-label="每周日期和支出金额"></ol>
+    </section>
+    <form class="panel">
+      <fieldset disabled>
+        <legend>记一笔</legend>
+        <button type="button" id="draft" hidden>带入刚才的点单</button>
+        <div class="inputs">
+          <label>收支类型<select id="kind"><option value="expense">茶饮支出</option><option value="income">收入／退款</option></select></label>
+          <label><span id="amount-label">实付金额（元）</span><input id="amount" inputmode="decimal" required placeholder="0.00" autocomplete="off"></label>
+          <label>日期<input id="date" type="date" required></label>
+          <label>备注（选填）<input id="note" maxlength="160" placeholder="品牌、饮品或来源" autocomplete="off"></label>
+        </div>
+        <button class="primary" type="submit">保存这笔收支</button>
+      </fieldset>
+      <p role="status" aria-live="polite" id="status">正在读取本机账本…</p>
+    </form>
+  </div>
+  <h4>每月明细</h4>
   <p id="month-summary"></p>
   <ul id="entries" aria-label="所选月收支"></ul>
   <button type="button" id="more" hidden>显示更多记录</button>

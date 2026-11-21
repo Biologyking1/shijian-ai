@@ -59,16 +59,56 @@ export function money(amount) {
 export function summarize(rows, month) {
   let balance = 0n, expense = 0n, income = 0n;
   const selected = [];
+  const weeks = [];
+  let weekdayOffset = 0;
+  if (validDate(month + "-01")) {
+    const date = new Date(month + "-01T00:00:00Z");
+    weekdayOffset = (date.getUTCDay() + 6) % 7;
+    date.setUTCMonth(date.getUTCMonth() + 1, 0);
+    const lastDay = date.getUTCDate();
+    for (let start = 1; start <= lastDay;) {
+      const end = Math.min(lastDay, start === 1 ? 7 - weekdayOffset : start + 6);
+      weeks.push({start, end, expense: 0n});
+      start = end + 1;
+    }
+  }
   for (const row of rows) {
     const cents = BigInt(row.cents);
     balance += row.kind === "income" ? cents : -cents;
     if (row.date.slice(0, 7) !== month) continue;
     selected.push(row);
     if (row.kind === "income") income += cents;
-    else expense += cents;
+    else {
+      expense += cents;
+      const index = Math.floor((Number(row.date.slice(8)) - 1 + weekdayOffset) / 7);
+      weeks[index].expense += cents;
+    }
   }
   selected.sort((a, b) => b.date.localeCompare(a.date));
-  return {balance, expense, income, selected};
+  return {balance, expense, income, selected, weeks};
+}
+
+function drawWeeklyChart(list, weeks, month) {
+  const max = weeks.reduce((peak, week) => week.expense > peak ? week.expense : peak, 0n);
+  const monthNumber = Number(month.slice(5));
+  list.replaceChildren();
+  for (const week of weeks) {
+    const item = document.createElement("li");
+    const label = document.createElement("span");
+    label.className = "week-date";
+    label.textContent = monthNumber + "月" + week.start +
+      (week.start === week.end ? "" : "–" + week.end) + "日";
+    const track = document.createElement("span");
+    track.className = "week-track";
+    track.setAttribute("aria-hidden", "true");
+    const bar = document.createElement("span");
+    bar.style.width = (max ? Number(week.expense * 10000n / max) / 100 : 0) + "%";
+    track.append(bar);
+    const value = document.createElement("b");
+    value.textContent = money(week.expense);
+    item.append(label, track, value);
+    list.append(item);
+  }
 }
 
 function openLedger(name) {
@@ -167,8 +207,10 @@ export default function render({parentElement, data}) {
   };
 
   function paint() {
-    const {balance, expense, income, selected} = summarize(rows, q("#month").value);
+    const month = q("#month").value;
+    const {balance, expense, income, selected, weeks} = summarize(rows, month);
     for (const [id, value] of Object.entries({balance, expense, income})) q("#" + id).textContent = money(value);
+    drawWeeklyChart(q("#weeks"), weeks, month);
     q("#month-summary").textContent = selected.length
       ? selected.length + " 笔收支 · 当月结余 " + money(income - expense) : "这个月还没有收支记录。";
     const list = q("#entries");
@@ -187,6 +229,7 @@ export default function render({parentElement, data}) {
       remove.type = "button";
       remove.className = "remove";
       remove.textContent = "删除";
+      remove.setAttribute("aria-label", "删除 " + row.date + " 的 " + value.textContent + " 记录");
       remove.onclick = () => {
         if (window.confirm("删除 " + row.date + " 的 " + value.textContent + " 记录？")) {
           perform(async () => { await deleteEntry(db, row.id); return "已删除这笔记录。"; });
@@ -236,7 +279,11 @@ export default function render({parentElement, data}) {
       return "已保存到此浏览器。";
     });
   };
-  q("#month").onchange = () => { limit = 20; paint(); };
+  q("#month").onchange = () => {
+    q("#month").value ||= localDate.slice(0, 7);
+    limit = 20;
+    paint();
+  };
   q("#more").onclick = () => { limit += 20; paint(); };
   q("#export").onclick = async () => {
     try { download(await readAll(db), localDate); }

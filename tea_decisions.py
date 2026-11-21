@@ -6,6 +6,7 @@ from uuid import uuid4
 
 import streamlit as st
 
+from comparison_cards import choose_pair, pair_verdict, render_pair
 from label_knowledge import watch_alerts
 from nutrition import FOCUS, NUTRIENTS, label_from_payload
 from shopping import DIMENSIONS, STATUS, Part, active_weights, default_profile, evaluate
@@ -372,7 +373,9 @@ def _tea_reason(reason):
     return reason.replace("单包", "单杯").replace("包装", "门店资料").replace("厂家", "门店")
 
 
-def _preview(base, order, flags, prefs):
+def _preview(base, order, flags, prefs, records):
+    from tea_chart import render_energy_chart, sweetness_variants
+
     changed = bool(base) and spec_key(base) != spec_key(order)
     st.markdown("**这杯的配方结果**")
     fields = [("每杯能量", "kcal", "kcal"), ("每杯总糖", "total_sugar", "g"), ("单杯总价", "price", "元")]
@@ -384,6 +387,7 @@ def _preview(base, order, flags, prefs):
         if field != "price" and order.get("value_type"):
             label += f"（{order['value_type']}）"
         col.metric(label, _metric(actual, unit), delta=delta, delta_color="off")
+    render_energy_chart(order, sweetness_variants(order, records))
     if order.get("personal_fields"):
         st.caption("个人补录或换算 · " + "、".join(order["personal_fields"]))
     for key, label, unit in (("estimated_kcal", "能量", "kcal"), ("estimated_total_sugar", "总糖", "g")):
@@ -445,7 +449,7 @@ def _save(order, action, uid=None):
 def _editor(base, records, prefs, flags, prefix, uid=None):
     changed = _spec_inputs(base, records, prefix)
     order = _facts(base, changed, records, prefs, prefix)
-    _preview(base, order, flags, prefs)
+    _preview(base, order, flags, prefs, records)
     disabled = not all(order.get(k) for k in ("brand", "name", "kind"))
     if disabled:
         st.caption("填入品牌、饮品名称和品类后即可保存。")
@@ -538,6 +542,23 @@ def render_comparison(prefs, flags):
             return
     st.caption("权重取自首页选购偏好。当前占比：" + ("、".join(
         f"{DIMENSIONS[k]} {v/sum(weights.values()):.0%}" for k, v in weights.items()) or "仅核对限制"))
+    decisions = compare_orders(items, profile, method, ref, scheme)
+    distinct_field = "kind" if mode == BRAND else "brand"
+    indices = choose_pair([_name(o) for o in items], "tea.compare.pair",
+                          categories=[o[distinct_field] for o in items])
+    pair = [decisions[i] for i in indices]
+    cups = [items[i] for i in indices]
+    energies = [("最高 " if o.get("value_type") == "最高标示值" and o.get("kcal") is not None else "")
+                + _metric(o.get("kcal"), "kcal") for o in cups]
+    nutrition_rows = [("每杯能量", energies)]
+    if method == GRADE:
+        nutrition_rows.append((scheme or "发布等级", [
+            published_grade(o) if scheme and o.get("grade_scheme") == scheme and published_grade(o) else "待核对"
+            for o in cups]))
+    subtitles = [" · ".join(str(o[k]) for k in ("brand", "kind", "size", "sugar", "temp") if o.get(k))
+                 for o in cups]
+    render_pair(pair, [o.get("name") or "未命名茶饮" for o in cups], subtitles, "单杯价格", nutrition_rows,
+                _tea_reason(pair_verdict(pair, weights, method)))
     need_price = ("budget" in weights or profile.get("budget") is not None)
     absent = [o for o in items if (need_price and yuan_price(o) is None) or ("taste" in weights and not o.get("flavors"))]
     if absent:
@@ -572,8 +593,8 @@ def render_comparison(prefs, flags):
             st.write("共享营养目标按每 100 mL 比较，各目标等权。越少越好的项目分数 = 100 × 参考值 ÷（实际值 + 参考值），"
                      "越多越好的项目将分子中的参考值换为实际值。")
         st.caption("每份资料只适用于所列地区和配方。价格请按该配置实际人民币金额填写。")
-    decisions = compare_orders(items, profile, method, ref, scheme)
     ranked = sorted(zip(items, decisions), key=lambda pair: pair[1].rank or (len(items) + 1))
+    st.markdown("**全部候选与评分明细**")
     for order, decision in ranked:
         with st.container(border=True):
             st.markdown(f"**{_name(order)}**")
@@ -581,7 +602,7 @@ def render_comparison(prefs, flags):
                 st.write(f"第 {decision.rank} 名 · {decision.score:.1f} 分")
             else:
                 st.write(STATUS[decision.status])
-            st.caption(f"{order['kind']} · 单杯价 {_metric(order.get('price'), '元')} · 每杯能量 {_metric(order.get('kcal'), 'kcal')}"
+            st.caption(f"{order['kind']} · 单杯价 {_metric(yuan_price(order), '元')} · 每杯能量 {_metric(order.get('kcal'), 'kcal')}"
                        + (f" · {order['grade_scheme']} {order['grade']} 级" if published_grade(order) else " · 分级待核对"))
             if order.get("scope"):
                 st.caption(order["scope"])
