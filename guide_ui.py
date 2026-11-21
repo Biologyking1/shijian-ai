@@ -1,11 +1,6 @@
 """Shared visual components for the food guide."""
 
-from pathlib import Path
-
 import streamlit as st
-
-
-GUIDE_CSS = Path(__file__).parent / "ui_assets" / "guide.css"
 
 
 def masthead():

@@ -1,11 +1,12 @@
 import os
 from io import BytesIO
+from pathlib import Path
 from urllib.parse import urlsplit
 
 import pandas as pd
 import streamlit as st
 
-from guide_ui import GUIDE_CSS, home_entries, home_heading, masthead, portion_html
+from guide_ui import home_entries, home_heading, masthead, portion_html
 from nutrition import (
     Basis, CATEGORIES, EXPLANATIONS, NUTRIENTS, FoodLabel, calculate_bmi, label_from_payload,
     portion_reference, review_food, scale_nutrients,
@@ -393,7 +394,7 @@ def start_tea_example():
 
 def main() -> None:
     st.set_page_config(page_title="食鉴 AI", page_icon="🍃", layout="wide")
-    st.html(GUIDE_CSS)
+    st.html(Path(__file__).with_name("ui_assets") / "guide.css")
     landing = not st.session_state.get("food_area")
     with st.container(horizontal=True, horizontal_alignment="distribute", vertical_alignment="center", key="guide_top"):
         masthead()
