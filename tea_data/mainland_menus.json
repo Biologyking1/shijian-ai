@@ -1,0 +1,735 @@
+[
+  {
+    "brand": "一点点",
+    "category": "点好茶",
+    "region": "中国大陆",
+    "source": "https://www.alittle-tea.com/ourdrinks/pureteaseries/",
+    "names": [
+      "奇韵观音",
+      "苹果茉莉绿",
+      "锦鲤红茶",
+      "六窨茉莉绿茶",
+      "四季春茶",
+      "冰淇淋红茶",
+      "红茶玛奇朵",
+      "葡萄柚绿"
+    ]
+  },
+  {
+    "brand": "一点点",
+    "category": "点奶茶",
+    "region": "中国大陆",
+    "source": "https://www.alittle-tea.com/ourdrinks/chewyseries/",
+    "names": [
+      "可可芭蕾",
+      "四季奶青",
+      "奶茶",
+      "六窨茉莉奶绿",
+      "抹茶奶茶",
+      "薄荷奶绿",
+      "藏青盐咸奶绿",
+      "阿华田"
+    ]
+  },
+  {
+    "brand": "一点点",
+    "category": "A2牛乳",
+    "region": "中国大陆",
+    "source": "https://www.alittle-tea.com/ourdrinks/tealatteseries/",
+    "names": [
+      "A2牛乳红茶",
+      "草莓A2牛乳绿茶"
+    ]
+  },
+  {
+    "brand": "一点点",
+    "category": "花果奶茶",
+    "region": "中国大陆",
+    "source": "https://www.alittle-tea.com/ourdrinks/freshfruitseries/",
+    "names": [
+      "苹果奶绿",
+      "QQ美莓奶茶",
+      "蔓越莓奶绿",
+      "奶绿装芒"
+    ]
+  },
+  {
+    "brand": "一点点",
+    "category": "点口感",
+    "region": "中国大陆",
+    "source": "https://www.alittle-tea.com/ourdrinks/milkteaseries/",
+    "names": [
+      "小珍珠奶茶",
+      "四季春珍波椰",
+      "布丁奶茶",
+      "波霸奶茶",
+      "椰果奶茶"
+    ]
+  },
+  {
+    "brand": "一点点",
+    "category": "0茶区",
+    "region": "中国大陆",
+    "source": "https://www.alittle-tea.com/ourdrinks/62/",
+    "names": [
+      "金桔柠檬",
+      "柠檬汁",
+      "香柠养乐多"
+    ]
+  },
+  {
+    "brand": "书亦烧仙草",
+    "category": "招牌烧仙草系列",
+    "region": "中国大陆",
+    "source": "https://shuyisxc.com/home/product/index/id/34.html",
+    "names": [
+      "牛奶烧仙草",
+      "生椰烧仙草",
+      "书亦烧仙草"
+    ]
+  },
+  {
+    "brand": "书亦烧仙草",
+    "category": "一桶大系列",
+    "region": "中国大陆",
+    "source": "https://shuyisxc.com/home/product/index/id/40.html",
+    "names": [
+      "一桶大西瓜椰椰",
+      "一桶大水果茶",
+      "一桶大蜜桃莓莓柠檬茶",
+      "一桶大粉梦芭乐柠檬茶",
+      "一桶大多肉葡萄",
+      "一桶大脆啵啵鲜榨西瓜",
+      "一桶大脆啵啵手捣鲜橙",
+      "一桶大脆啵啵手剥青提",
+      "一桶大爆有料",
+      "一桶大暴打泰式柠檬茶",
+      "一桶大牛奶烧仙草"
+    ]
+  },
+  {
+    "brand": "书亦烧仙草",
+    "category": "有料奶茶",
+    "region": "中国大陆",
+    "source": "https://shuyisxc.com/home/product/index/id/13.html",
+    "names": [
+      "红豆夹心糯糯珠",
+      "老红糖珍珠奶茶",
+      "招牌芋圆奶绿"
+    ]
+  },
+  {
+    "brand": "书亦烧仙草",
+    "category": "清爽果茶",
+    "region": "中国大陆",
+    "source": "https://shuyisxc.com/home/product/index/id/39.html",
+    "names": [
+      "金桔柠檬水",
+      "多肉西瓜椰椰",
+      "多肉葡萄柠檬茶",
+      "脆啵啵鲜榨西瓜",
+      "脆啵啵手捣鲜橙"
+    ]
+  },
+  {
+    "brand": "书亦烧仙草",
+    "category": "水果茶&轻乳茶",
+    "region": "中国大陆",
+    "source": "https://shuyisxc.com/home/product/index/id/14.html",
+    "names": [
+      "葡萄茉莉奶绿",
+      "海风青柠冰奶",
+      "草莓布丁奶绿",
+      "幽兰乌龙",
+      "茉莉奶绿",
+      "薄荷奶绿"
+    ]
+  },
+  {
+    "brand": "益禾堂",
+    "category": "招牌薄荷",
+    "region": "中国大陆",
+    "source": "https://www.yihetang.com/products.html",
+    "names": [
+      "薄荷奶绿",
+      "薄荷柠檬水",
+      "元气薄荷小汤圆"
+    ]
+  },
+  {
+    "brand": "益禾堂",
+    "category": "经典奶茶",
+    "region": "中国大陆",
+    "source": "https://www.yihetang.com/products.html",
+    "names": [
+      "益禾烤奶",
+      "禾风奶绿",
+      "益杯烧仙草",
+      "珍珠奶茶"
+    ]
+  },
+  {
+    "brand": "益禾堂",
+    "category": "清爽果茶",
+    "region": "中国大陆",
+    "source": "https://www.yihetang.com/products.html",
+    "names": [
+      "爆打鲜橙",
+      "西瓜鲜果茶",
+      "柠檬小麦青汁",
+      "杨枝甘露"
+    ]
+  },
+  {
+    "brand": "益禾堂",
+    "category": "现磨咖啡",
+    "region": "中国大陆",
+    "source": "https://www.yihetang.com/products.html",
+    "names": [
+      "生椰拿铁",
+      "橙C美式",
+      "阳光青提美式",
+      "春雪蜜桃拿铁"
+    ]
+  },
+  {
+    "brand": "茶百道",
+    "category": "产品推荐",
+    "region": "中国大陆",
+    "source": "https://www.chabaidao.com/home/product/index/id/2.html",
+    "names": [
+      "豆乳玉麒麟",
+      "青提茉莉",
+      "西瓜啵啵",
+      "杨枝甘露",
+      "荔枝冰奶"
+    ]
+  },
+  {
+    "brand": "奈雪的茶",
+    "category": "畅销产品",
+    "region": "中国大陆",
+    "source": "https://www.naixue.com/",
+    "names": [
+      "奈雪瘦瘦小绿瓶",
+      "奈雪畅畅小绿瓶",
+      "超能牛油果酸奶昔",
+      "66颗蓝莓桑葚酸奶昔"
+    ]
+  },
+  {
+    "brand": "甜啦啦",
+    "category": "冰鲜果茶",
+    "region": "中国大陆",
+    "source": "https://www.tianlala.com/bingxianguocha/",
+    "names": [
+      "多肉葡萄",
+      "水蜜桃晶球",
+      "百香金菠萝",
+      "冰鲜柠檬水",
+      "多肉杨梅",
+      "芒果摇摇杯",
+      "葡萄摇摇杯",
+      "葡萄爆柠",
+      "草莓摇摇杯",
+      "一桶水果茶",
+      "贵气桑葚草莓",
+      "贵气桑葚杨梅"
+    ]
+  },
+  {
+    "brand": "甜啦啦",
+    "category": "夏日经典",
+    "region": "中国大陆",
+    "source": "https://www.tianlala.com/xiarijingdian/",
+    "names": [
+      "生椰拿铁",
+      "雪顶咖啡",
+      "美式咖啡",
+      "桃荫乌龙",
+      "九曲梅红",
+      "花涧幽兰"
+    ]
+  },
+  {
+    "brand": "甜啦啦",
+    "category": "有料奶茶",
+    "region": "中国大陆",
+    "source": "https://www.tianlala.com/youliaonaicha/",
+    "names": [
+      "清风茉白鲜奶茶",
+      "金乌桃胶大红袍",
+      "黑糖珍珠奶茶",
+      "芋圆啵啵奶茶",
+      "一桶全家福"
+    ]
+  },
+  {
+    "brand": "爷爷不泡茶",
+    "category": "时令上新",
+    "region": "中国大陆",
+    "source": "https://www.yeyebpc.com/products/series/",
+    "names": [
+      "栀子龙眼椰",
+      "鲜台芒·嚼酸奶",
+      "奇香桃桃",
+      "草莓桃·嚼酸奶",
+      "美十三草莓奶冻",
+      "美十三草莓牛奶冰"
+    ]
+  },
+  {
+    "brand": "爷爷不泡茶",
+    "category": "孝感米酿",
+    "region": "中国大陆",
+    "source": "https://www.yeyebpc.com/products/series/",
+    "names": [
+      "荔枝冰酿",
+      "奶油米酒",
+      "杨梅冰酿"
+    ]
+  },
+  {
+    "brand": "爷爷不泡茶",
+    "category": "鲜打·奶香青柠",
+    "region": "中国大陆",
+    "source": "https://www.yeyebpc.com/products/series/",
+    "names": [
+      "兰香青柠",
+      "奇香青柠"
+    ]
+  },
+  {
+    "brand": "爷爷不泡茶",
+    "category": "花香鲜果茶",
+    "region": "中国大陆",
+    "source": "https://www.yeyebpc.com/products/series/",
+    "names": [
+      "西西里柠檬柚",
+      "西班牙红葡萄冰茶",
+      "西瓜冰茶",
+      "鲜·玫瑰荔枝",
+      "爆打十五次·奇兰柠檬茶",
+      "初恋玫瑰青提"
+    ]
+  },
+  {
+    "brand": "爷爷不泡茶",
+    "category": "花香鲜果奶",
+    "region": "中国大陆",
+    "source": "https://www.yeyebpc.com/products/series/",
+    "names": [
+      "乌日莫鲜奶酪葡萄",
+      "桃桃双皮奶",
+      "鲜·荔枝冰奶",
+      "西瓜马蹄椰"
+    ]
+  },
+  {
+    "brand": "爷爷不泡茶",
+    "category": "低负担·轻乳香茶",
+    "region": "中国大陆",
+    "source": "https://www.yeyebpc.com/products/series/",
+    "names": [
+      "空山栀子",
+      "咸宁桂花",
+      "红苹果",
+      "武汉茉莉",
+      "水蜜桃",
+      "白兰玉露"
+    ]
+  },
+  {
+    "brand": "茶话弄",
+    "category": "桂花家族",
+    "region": "中国大陆",
+    "source": "https://www.chahuanong.com/index.php?catid=41",
+    "names": [
+      "桂花引",
+      "长安荔枝",
+      "桂花米酿"
+    ]
+  },
+  {
+    "brand": "茶话弄",
+    "category": "原叶奶茶",
+    "region": "中国大陆",
+    "source": "https://www.chahuanong.com/index.php?catid=42",
+    "names": [
+      "梅占摇红",
+      "南山烟雨",
+      "芊芊绿雪",
+      "黛玉",
+      "茯生半日闲"
+    ]
+  },
+  {
+    "brand": "茶话弄",
+    "category": "沁爽果茶",
+    "region": "中国大陆",
+    "source": "https://www.chahuanong.com/index.php?catid=43",
+    "names": [
+      "葡玉问墨",
+      "金桔柠檬茶",
+      "手捣柠檬茶"
+    ]
+  },
+  {
+    "brand": "蜜雪冰城",
+    "category": "清爽真果茶",
+    "region": "中国大陆",
+    "source": "https://www.mxbc.com/product_strength.html",
+    "names": [
+      "冰鲜柠檬水",
+      "蜜桃四季春",
+      "棒打鲜橙"
+    ]
+  },
+  {
+    "brand": "蜜雪冰城",
+    "category": "新鲜冰淇淋",
+    "region": "中国大陆",
+    "source": "https://www.mxbc.com/product_strength.html",
+    "names": [
+      "草莓摇摇奶昔"
+    ]
+  },
+  {
+    "brand": "蜜雪冰城",
+    "category": "雪王咖啡",
+    "region": "中国大陆",
+    "source": "https://www.mxbc.com/product_strength.html",
+    "names": [
+      "雪王雪顶咖啡",
+      "美式咖啡"
+    ]
+  },
+  {
+    "brand": "蜜雪冰城",
+    "category": "经典厚奶茶",
+    "region": "中国大陆",
+    "source": "https://www.mxbc.com/product_strength.html",
+    "names": [
+      "珍珠奶茶",
+      "椰果奶茶",
+      "双拼奶茶"
+    ]
+  },
+  {
+    "brand": "蜜雪冰城",
+    "category": "轻乳茶·纯茶",
+    "region": "中国大陆",
+    "source": "https://www.mxbc.com/product_strength.html",
+    "names": [
+      "茉莉奶绿",
+      "茉莉绿茶"
+    ]
+  },
+  {
+    "brand": "蜜雪冰城",
+    "category": "生打椰椰",
+    "region": "中国大陆",
+    "source": "https://www.mxbc.com/product_strength.html",
+    "names": [
+      "港式杨枝甘露",
+      "椰椰拿铁"
+    ]
+  },
+  {
+    "brand": "茉莉奶白",
+    "category": "花香鲜茶系列",
+    "region": "中国大陆",
+    "source": "https://cn.mollytea.com/product-categories-cn/",
+    "names": [
+      "茉莉奶白",
+      "桂花龙井",
+      "白兰",
+      "栀子奶白"
+    ]
+  },
+  {
+    "brand": "茉莉奶白",
+    "category": "花香鲜茶系列",
+    "region": "中国大陆",
+    "source": "https://cn.mollytea.com/product-categories-cn/?e-page-c8c1f76=2",
+    "names": [
+      "白兰金萱",
+      "单丛",
+      "栀子金萱",
+      "蜜桃老铁"
+    ]
+  },
+  {
+    "brand": "茉莉奶白",
+    "category": "花香必尝系列",
+    "region": "中国大陆",
+    "source": "https://cn.mollytea.com/product-categories-cn/",
+    "names": [
+      "抹茶白兰",
+      "抹茶针王",
+      "开心果茉莉椰",
+      "开心果小兰花"
+    ]
+  },
+  {
+    "brand": "茉莉奶白",
+    "category": "花香奶油顶系列",
+    "region": "中国大陆",
+    "source": "https://cn.mollytea.com/product-categories-cn/",
+    "names": [
+      "一口单丛",
+      "一朵栀子花",
+      "一朵茉莉花",
+      "一口老铁"
+    ]
+  },
+  {
+    "brand": "茉莉奶白",
+    "category": "花香冰茶系列",
+    "region": "中国大陆",
+    "source": "https://cn.mollytea.com/product-categories-cn/",
+    "names": [
+      "栀子冰茶",
+      "茉莉奶白冰茶"
+    ]
+  },
+  {
+    "brand": "茉莉奶白",
+    "category": "花香果茶系列",
+    "region": "中国大陆",
+    "source": "https://cn.mollytea.com/product-categories-cn/",
+    "names": [
+      "茉莉杨枝甘露"
+    ]
+  },
+  {
+    "brand": "喜茶",
+    "category": "茶特调",
+    "region": "中国大陆",
+    "source": "https://www.heytea.com/products",
+    "names": [
+      "雪毫茉王芭乐",
+      "金观音香柚"
+    ]
+  },
+  {
+    "brand": "喜茶",
+    "category": "牛乳茶",
+    "region": "中国大陆",
+    "source": "https://www.heytea.com/products",
+    "names": [
+      "咸酪龙井",
+      "咸酪英红",
+      "英红糯糯",
+      "小奶茉"
+    ]
+  },
+  {
+    "brand": "喜茶",
+    "category": "植物茶",
+    "region": "中国大陆",
+    "source": "https://www.heytea.com/products",
+    "names": [
+      "羽衣纤体瓶"
+    ]
+  },
+  {
+    "brand": "喜茶",
+    "category": "千目抹茶",
+    "region": "中国大陆",
+    "source": "https://www.heytea.com/products",
+    "names": [
+      "三倍厚抹"
+    ]
+  },
+  {
+    "brand": "喜茶",
+    "category": "鲜果茶",
+    "region": "中国大陆",
+    "source": "https://www.heytea.com/products",
+    "names": [
+      "椰椰芒芒",
+      "多肉提子"
+    ]
+  },
+  {
+    "brand": "喜茶",
+    "category": "波波牛乳茶",
+    "region": "中国大陆",
+    "source": "https://www.heytea.com/products",
+    "names": [
+      "烤黑糖波波牛乳茶"
+    ]
+  },
+  {
+    "brand": "CoCo都可",
+    "category": "功夫好茶",
+    "region": "中国大陆",
+    "source": "https://www.coco-tea.com.cn/product.html",
+    "names": [
+      "岩韵大红袍",
+      "大红袍珍珠奶茶",
+      "大红袍珍珠牛乳茶",
+      "清香茉莉绿",
+      "一抹清茉",
+      "抹茉大福",
+      "手打柠檬鸭屎香"
+    ]
+  },
+  {
+    "brand": "CoCo都可",
+    "category": "好喝轻负担",
+    "region": "中国大陆",
+    "source": "https://www.coco-tea.com.cn/product.html",
+    "names": [
+      "清香茉莉轻乳茶",
+      "兰香凤凰单丛轻乳茶",
+      "沐春风",
+      "日落锡兰",
+      "月下绮梦"
+    ]
+  },
+  {
+    "brand": "CoCo都可",
+    "category": "手作真谷物",
+    "region": "中国大陆",
+    "source": "https://www.coco-tea.com.cn/product.html",
+    "names": [
+      "鲜芋青稞牛奶",
+      "青稞红豆牛奶",
+      "现煮红豆奶茶",
+      "鲜芋麻薯米乳",
+      "米乳拿铁",
+      "鲜芋青稞米乳",
+      "奶霜大红袍米乳",
+      "鲜芋牛奶",
+      "鲜芋大福",
+      "双倍鲜芋奶绿"
+    ]
+  },
+  {
+    "brand": "CoCo都可",
+    "category": "季节限定",
+    "region": "中国大陆",
+    "source": "https://www.coco-tea.com.cn/product.html",
+    "names": [
+      "双拼巧克力牛奶",
+      "珍珠巧克力牛奶",
+      "CoCo巧克力牛奶",
+      "绿茶养乐多",
+      "芒果养乐多",
+      "柠檬椰果养乐多",
+      "摇摇凤梨可乐达",
+      "凤梨可乐达",
+      "凤梨金桔茶",
+      "柠檬霸",
+      "芋见茉绿小青团",
+      "茉绿小青团",
+      "现煮绿豆冰",
+      "现煮绿豆牛奶冰",
+      "现煮生椰绿豆冰",
+      "现煮绿豆米乳",
+      "青稞巧克力",
+      "双拼巧克力",
+      "布丁巧克力",
+      "珍珠巧克力",
+      "CoCo巧克力",
+      "红运车厘子莓莓冰",
+      "红运车厘子大福",
+      "红运车厘子冰茶",
+      "鲜草莓大福",
+      "鲜爽莓莓"
+    ]
+  },
+  {
+    "brand": "CoCo都可",
+    "category": "有料果茶",
+    "region": "中国大陆",
+    "source": "https://www.coco-tea.com.cn/product.html",
+    "names": [
+      "西瓜冰茶",
+      "西瓜椰椰",
+      "水果吨吨桶",
+      "鲜百香双响炮",
+      "星空葡萄",
+      "小青柑百香",
+      "阳光青提泡泡",
+      "雨后青提",
+      "青提知夏",
+      "蜜桃冰茶",
+      "轻蜜桃大福",
+      "蜜恋桃桃"
+    ]
+  },
+  {
+    "brand": "古茗",
+    "category": "果茶饮品（2025年2月招股书）",
+    "region": "中国大陆",
+    "source": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0204/2025020400012_c.pdf#page=181",
+    "names": [
+      "超A芝士葡萄",
+      "超A芝士桃桃",
+      "一颗香水柠",
+      "满杯杨梅"
+    ]
+  },
+  {
+    "brand": "古茗",
+    "category": "奶茶饮品（2025年2月招股书）",
+    "region": "中国大陆",
+    "source": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0204/2025020400012_c.pdf#page=182",
+    "names": [
+      "古茗奶茶",
+      "什么都有",
+      "龙井香青团",
+      "云岭茉莉白"
+    ]
+  },
+  {
+    "brand": "古茗",
+    "category": "咖啡饮品及其他（2025年2月招股书）",
+    "region": "中国大陆",
+    "source": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0204/2025020400012_c.pdf#page=183",
+    "names": [
+      "大橘美式",
+      "香水椰椰拿铁",
+      "牛油果奶昔",
+      "曲香茉莉"
+    ]
+  },
+  {
+    "brand": "沪上阿姨",
+    "category": "主打产品（2025年4月招股书）",
+    "region": "中国大陆",
+    "source": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0428/2025042800056_c.pdf#page=158",
+    "names": [
+      "杨枝甘露",
+      "厚芋泥波波奶茶",
+      "桃桃蜜柚",
+      "超嗲草莓大福",
+      "浅浅清茉"
+    ]
+  },
+  {
+    "brand": "沪上阿姨",
+    "category": "季节限定产品（2025年4月招股书）",
+    "region": "中国大陆",
+    "source": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0428/2025042800056_c.pdf#page=159",
+    "names": [
+      "仙仙玫瑰青提",
+      "绿豆牛乳冰",
+      "牛油果巴旦木酸奶昔",
+      "多肉葡萄金砖"
+    ]
+  },
+  {
+    "brand": "奈雪的茶",
+    "category": "畅销产品",
+    "region": "中国大陆",
+    "source": "https://www.naixue.com/introduction",
+    "names": [
+      "杨枝甘露酸奶昔",
+      "霸气橙子"
+    ]
+  }
+]

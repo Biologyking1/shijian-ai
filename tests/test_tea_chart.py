@@ -19,7 +19,7 @@ class TeaChartTests(unittest.TestCase):
         )]
         group = sweetness_variants(self.first, self.records + unrelated)
         self.assertEqual([(r["sugar"], r["kcal"], r["grade"]) for r in group], [
-            ("不另外加糖", 130, "B"), ("少糖", 207, "B"), ("标准糖", 211, "C"),
+            ("不另外加糖", 130, "B"), ("微糖", 194, "B"), ("少糖", 207, "B"), ("标准糖", 211, "C"),
         ])
         self.assertFalse(sweetness_variants(dict(self.first, kcal=0), self.records))
         self.assertFalse(sweetness_variants(dict(self.first, personal_fields=["能量"]), self.records))
@@ -39,7 +39,7 @@ class TeaChartTests(unittest.TestCase):
         def sweetness():
             return next(n for n in app.radio if n.label == "切换同配方甜度")
 
-        self.assertEqual(sweetness().options, ["不另外加糖", "少糖", "标准糖"])
+        self.assertEqual(sweetness().options, ["不另外加糖", "微糖", "少糖", "标准糖"])
         self.assertIn("少 81 kcal", panel("tea-energy"))
         self.assertIn("待补", panel("tea-recipe"))
         sweetness().set_value("标准糖").run()

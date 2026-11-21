@@ -26,7 +26,11 @@ METRICS = {
     "caffeine": "productCaffeine",
     "trans_fat": "tfa",
 }
-CATEGORIES = {"原叶鲜奶茶": "鲜奶茶", "青云雪顶集": "奶盖茶", "活力轻果茶": "果茶", "远山鲜沏篇": "纯茶"}
+CATEGORIES = {
+    "原叶鲜奶茶": "鲜奶茶", "青云雪顶集": "奶盖茶", "活力轻果茶": "果茶", "远山鲜沏篇": "纯茶",
+    "原叶茶拿铁": "鲜奶茶", "极萃茶拿铁": "鲜奶茶", "极萃茶冰川": "极萃茶冰川",
+    "茶特调": "茶特调", "轻因柠檬奶": "轻因柠檬奶", "抹茶系列": "抹茶", "可可系列": "可可",
+}
 
 
 def _value(raw):
@@ -49,7 +53,7 @@ def _display_options(data):
     return result
 
 
-def read_recipe(client, name, selected=None):
+def read_recipe(client, name, selected=None, *, options=None):
     """Ignore a fallback product or recipe whenever it differs from the requested one."""
     if not isinstance(name, str) or not 1 <= len(name.strip()) <= 100:
         return None
@@ -74,36 +78,43 @@ def read_recipe(client, name, selected=None):
         return None
     if not all(recipe[k] for k in ("size", "sugar", "temp")):
         return None
-    option_response = client.post(endpoint + "space", params={"productName": name})
-    option_response.raise_for_status()
-    option_body = option_response.json()
-    options = (
-        _display_options(option_body["data"])
-        if (
-            isinstance(option_body, dict)
-            and str(option_body.get("code")) == "1000"
-            and isinstance(option_body.get("data"), dict)
+    if options is None:
+        option_response = client.post(endpoint + "space", params={"productName": name})
+        option_response.raise_for_status()
+        option_body = option_response.json()
+        options = (
+            _display_options(option_body["data"])
+            if isinstance(option_body, dict) and str(option_body.get("code")) == "1000"
+            and isinstance(option_body.get("data"), dict) else {}
         )
-        else {}
-    )
     grade = raw.get("greenGrade")
+    return recipe_record(
+        name, raw.get("productType"), recipe, options, grade,
+        {key: _value(raw.get(field)) for key, field in METRICS.items()},
+        datetime.now(timezone(timedelta(hours=8))).date().isoformat(),
+    )
+
+
+def recipe_record(name, category, recipe, options, grade, nutrients, date):
+    """Give saved and live readings identical recipe identities and units."""
+    recipe = {key: recipe.get(key, "") for key in FIELDS}
     return {
         "brand": BRAND,
         "name": name,
-        "kind": CATEGORIES.get(raw.get("productType"), "其他"),
+        "kind": CATEGORIES.get(category, category or "其他"),
         **{k: recipe[k] for k in ("size", "sugar", "temp")},
         "region": "中国大陆",
         "scope": "品牌健康计算器" + "".join(" · " + recipe[k] for k in ("tea", "milk") if recipe[k]),
         "toppings": [recipe[k] for k in ("bubble", "extra") if recipe[k]],
         "chagee_options": options,
         "chagee_recipe": recipe,
-        "date": datetime.now(timezone(timedelta(hours=8))).date().isoformat(),
+        "date": date,
         "source": SOURCE,
         "grade_source": SOURCE,
         "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
         "grade": grade if grade in ("A", "B", "C", "D") else None,
         "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
-        **{key: _value(raw.get(field)) for key, field in METRICS.items()},
+        **nutrients,
     }
 
 

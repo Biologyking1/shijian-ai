@@ -399,6 +399,7 @@ def start_tea_example():
     st.session_state.update({"food_area": "现制奶茶", "tea.route": "查一杯奶茶",
                              "tea.entry": "填写品牌与品名", "tea.brand": brand, "tea.name": name,
                              "tea.query": (brand, name)})
+    st.session_state.pop("tea.query.region", None)
     st.session_state.pop("tea.slip", None)
 
 
