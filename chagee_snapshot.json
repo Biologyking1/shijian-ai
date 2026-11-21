@@ -1,0 +1,720 @@
+[
+  {
+    "brand": "霸王茶姬",
+    "name": "伯牙绝弦",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器 · 茶香款",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [
+        "茶香款",
+        "花香款"
+      ],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "茶香款",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 130.0,
+    "protein": 2.8,
+    "carbs": 6.7,
+    "fat": 10.3,
+    "caffeine": 103.9,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "伯牙绝弦",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "少糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器 · 茶香款",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [
+        "茶香款",
+        "花香款"
+      ],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "少糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "茶香款",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 207.0,
+    "protein": 2.8,
+    "carbs": 25.9,
+    "fat": 10.3,
+    "caffeine": 93.1,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "伯牙绝弦",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "标准糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器 · 茶香款",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [
+        "茶香款",
+        "花香款"
+      ],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "标准糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "茶香款",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "C",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 211.0,
+    "protein": 2.7,
+    "carbs": 27.4,
+    "fat": 10.1,
+    "caffeine": 91.7,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "伯牙绝弦",
+    "kind": "鲜奶茶",
+    "size": "大杯",
+    "sugar": "少糖",
+    "temp": "去冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器 · 茶香款",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [
+        "茶香款",
+        "花香款"
+      ],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "大杯",
+      "sugar": "少糖",
+      "temp": "去冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "茶香款",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 260.0,
+    "protein": 3.6,
+    "carbs": 32.1,
+    "fat": 13.0,
+    "caffeine": 110.8,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "伯牙绝弦",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "少糖",
+    "temp": "热",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器 · 茶香款",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [
+        "茶香款",
+        "花香款"
+      ],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "少糖",
+      "temp": "热",
+      "bubble": "",
+      "extra": "",
+      "tea": "茶香款",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 221.0,
+    "protein": 3.6,
+    "carbs": 27.7,
+    "fat": 10.7,
+    "caffeine": 120.8,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "寻香山茶",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 93.0,
+    "protein": 2.6,
+    "carbs": 5.2,
+    "fat": 7.0,
+    "caffeine": 91.6,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "桂馥兰香",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "少冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器 · 桂花乌龙",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "半糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [
+        "桂花乌龙"
+      ],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "少冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "桂花乌龙",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 90.0,
+    "protein": 2.96,
+    "carbs": 4.2,
+    "fat": 6.9,
+    "caffeine": 107.0,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "花田乌龙",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "少冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "半糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "少冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 124.0,
+    "protein": 3.6,
+    "carbs": 5.5,
+    "fat": 9.8,
+    "caffeine": 73.3,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "栖云听雨",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 136.0,
+    "protein": 3.5,
+    "carbs": 11.3,
+    "fat": 8.8,
+    "caffeine": 200.0,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "金茯揽月",
+    "kind": "鲜奶茶",
+    "size": "大杯",
+    "sugar": "不另外加糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "半糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "大杯",
+      "sugar": "不另外加糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 153.0,
+    "protein": 4.8,
+    "carbs": 8.1,
+    "fat": 0.0,
+    "caffeine": 227.0,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "青青糯山",
+    "kind": "鲜奶茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "大杯",
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "半糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "少冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "B",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 106.0,
+    "protein": 2.7,
+    "carbs": 6.1,
+    "fat": 8.0,
+    "caffeine": 55.6,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "酌红袍",
+    "kind": "纯茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "去冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "中杯"
+      ],
+      "sugar": [
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "去冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "A",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 0.0,
+    "protein": 0.0,
+    "carbs": 0.5,
+    "fat": 0.0,
+    "caffeine": 62.9,
+    "trans_fat": 0.0
+  },
+  {
+    "brand": "霸王茶姬",
+    "name": "云中绿",
+    "kind": "纯茶",
+    "size": "中杯",
+    "sugar": "不另外加糖",
+    "temp": "标准冰",
+    "region": "中国大陆",
+    "scope": "品牌健康计算器",
+    "toppings": [],
+    "chagee_options": {
+      "size": [
+        "中杯"
+      ],
+      "sugar": [
+        "标准糖",
+        "少糖",
+        "半糖",
+        "微糖",
+        "不另外加糖"
+      ],
+      "temp": [
+        "标准冰",
+        "去冰",
+        "热"
+      ],
+      "bubble": [],
+      "extra": [],
+      "tea": [],
+      "milk": []
+    },
+    "chagee_recipe": {
+      "size": "中杯",
+      "sugar": "不另外加糖",
+      "temp": "标准冰",
+      "bubble": "",
+      "extra": "",
+      "tea": "",
+      "milk": ""
+    },
+    "date": "2026-11-20",
+    "source": "https://qmproductcomput.bwcj.com/",
+    "grade_source": "https://qmproductcomput.bwcj.com/",
+    "source_label": "霸王茶姬健康计算器 · 中国大陆 · 每杯参考值",
+    "grade": "A",
+    "grade_scheme": "霸王茶姬中国大陆健康计算器「营养选择」",
+    "kcal": 0.0,
+    "protein": 0.0,
+    "carbs": 2.5,
+    "fat": 0.0,
+    "caffeine": 58.0,
+    "trans_fat": 0.0
+  }
+]
