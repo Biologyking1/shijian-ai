@@ -8,6 +8,8 @@
 
 全站视觉在 Streamlit 中适配自 Nova Studio 的免费健康模板 Chard。首页横幅为摄影师 ha ha 拍摄的超市食品货架，按 Pexels 许可用于本项目。[Framer 模板](https://www.framer.com/marketplace/templates/chard/) · [模板设计指南](https://chard.framer.website/design-system) · [货架原片](https://www.pexels.com/photo/shelves-in-grocery-store-16211537/) · [照片许可](https://www.pexels.com/license/)
 
+首页底部展示中国农业大学经济管理学院院徽，并署名「参赛小队 · 三区兄弟」。院徽采用学院公布的原图。[学院文化标识](https://cem.cau.edu.cn/col/col56788/index.html)
+
 ## 现制奶茶
 
 此专区接收杯贴、单杯订单、品牌营养卡，以及对应的品牌、品名和点单规格。拍照前可裁去姓名、手机号及取餐码。

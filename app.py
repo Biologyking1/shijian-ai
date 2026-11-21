@@ -428,6 +428,16 @@ def main() -> None:
                 food_action = "继续查看我的食品" if st.session_state.get("single_product") else "试读一瓶柠檬茶的标签"
                 st.button(food_action, key="guide_food_demo", type="primary", on_click=start_food_example)
                 st.button("试一杯伯牙绝弦", key="guide_demo", on_click=start_tea_example)
+        st.html("""
+            <footer class="guide-team-credit" aria-label="参赛小队署名">
+              <img src="app/static/cau-cem-emblem.png" width="1401" height="1601"
+                   alt="中国农业大学经济管理学院院徽">
+              <div>
+                <span>中国农业大学经济管理学院</span>
+                <small>参赛小队 · 三区兄弟</small>
+              </div>
+            </footer>
+        """)
         return
     with st.container(key="area_switch"):
         area = st.radio("选择食品专区", list(AREAS), key="food_area",

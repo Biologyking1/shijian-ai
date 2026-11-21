@@ -56,6 +56,11 @@ h2 { letter-spacing: -.035em; }
 :is(.st-key-tea_functions,.st-key-packaged_functions) label:has(input:checked) p { color:white; font-weight:650; }
 :is(.st-key-tea_functions,.st-key-packaged_functions) label:focus-within { outline:2px solid var(--guide-beet); outline-offset:1px; }
 .st-key-quick_demo { border-top:1px dashed #aba497; padding-top:1rem; }
+.guide-team-credit { display:flex; align-items:center; gap:.6rem; margin-top:1.25rem;
+  padding-top:.9rem; border-top:1px solid var(--guide-line); }
+.guide-team-credit img { flex:none; width:3.5rem; height:auto; }
+.guide-team-credit span { color:var(--guide-ink); font:600 .94rem/1.5 var(--guide-sans); }
+.guide-team-credit small { display:block; margin-top:.15rem; color:var(--guide-muted); font:.8rem/1.5 var(--guide-sans); }
 [data-testid=stExpander] details, [data-testid=stForm] { background:var(--guide-card); border:1px solid var(--guide-line); border-radius:5px; }
 .st-key-guide_profile details { background:var(--guide-paper); }
 [data-testid=stFileUploaderDropzone] { border:1px dashed #998e80; background:#f8f5ef; border-radius:4px; }
