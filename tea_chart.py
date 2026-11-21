@@ -54,28 +54,28 @@ def _axis_ceiling(maximum):
 
 _CHART_STYLE = """
 <style>
-.tea-energy {background:#faf8ef;color:#193c30;border:1px solid #d8dfd1;border-radius:18px;
+.tea-energy {background:var(--guide-card);color:var(--guide-ink);border:1px solid var(--guide-line);border-radius:4px;
   padding:clamp(1rem,3vw,1.55rem);margin:0;font:inherit;box-sizing:border-box}
-.tea-energy h3 {font:inherit;font-size:1.15rem;font-weight:700;color:#173d30;margin:0;padding:0}
-.tea-energy .tea-scale-caption,.tea-energy figcaption {font-size:.88rem;color:#496052;line-height:1.6}
+.tea-energy h3 {font:inherit;font-size:1.15rem;font-weight:700;color:var(--guide-ink);margin:0;padding:0}
+.tea-energy .tea-scale-caption,.tea-energy figcaption {font-size:.88rem;color:var(--guide-muted);line-height:1.6}
 .tea-energy .tea-scale-caption {margin:.18rem 0 1rem}
 .tea-energy .tea-bar-list {list-style:none;margin:0;padding:0}
 .tea-energy .tea-bar-row,.tea-energy .tea-axis {display:grid;grid-template-columns:6.4em minmax(0,1fr) 4em;
   align-items:center;column-gap:.7rem;list-style:none;padding:0;margin:.65rem 0;font-size:.9rem}
 .tea-energy .tea-bar-name {line-height:1.35;overflow-wrap:anywhere}
-.tea-energy .tea-bar-name small {display:block;font-weight:400;color:#506353}
+.tea-energy .tea-bar-name small {display:block;font-weight:400;color:var(--guide-muted)}
 .tea-energy .tea-active {font-weight:750}
-.tea-energy .tea-track {display:block;height:.82rem;background:#e5e7dc;border-radius:0 5px 5px 0;
-  border-left:1px solid #698172;overflow:hidden;box-sizing:border-box}
-.tea-energy .tea-fill {display:block;height:100%;background:#a4b59d;border-radius:0 4px 4px 0}
-.tea-energy .tea-active .tea-fill {background:#245943}
+.tea-energy .tea-track {display:block;height:.82rem;background:#e7e2d8;border-radius:0 5px 5px 0;
+  border-left:1px solid #918b81;overflow:hidden;box-sizing:border-box}
+.tea-energy .tea-fill {display:block;height:100%;background:#9c968b;border-radius:0 4px 4px 0}
+.tea-energy .tea-active .tea-fill {background:var(--guide-beet)}
 .tea-energy .tea-amount {text-align:right;font-variant-numeric:tabular-nums}
-.tea-energy .tea-axis {margin-top:.24rem;color:#526658;font-variant-numeric:tabular-nums;font-size:.8rem;
+.tea-energy .tea-axis {margin-top:.24rem;color:var(--guide-muted);font-variant-numeric:tabular-nums;font-size:.8rem;
   grid-template-columns:7.2em minmax(0,1fr) 4.5em}
-.tea-energy .tea-ticks {grid-column:2;display:flex;justify-content:space-between;border-top:1px solid #bac8b9;
+.tea-energy .tea-ticks {grid-column:2;display:flex;justify-content:space-between;border-top:1px solid var(--guide-line);
   padding-top:.18rem}
-.tea-energy figcaption {margin-top:.9rem;border-top:1px solid #dce1d4;padding-top:.75rem}
-.tea-energy figcaption strong {color:#204e39}
+.tea-energy figcaption {margin-top:.9rem;border-top:1px dashed var(--guide-line);padding-top:.75rem}
+.tea-energy figcaption strong {color:var(--guide-ink)}
 @media(max-width:500px){.tea-energy .tea-bar-row,.tea-energy .tea-axis{column-gap:.45rem}}
 </style>
 """

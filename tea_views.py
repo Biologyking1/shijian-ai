@@ -157,28 +157,28 @@ def _recipe_summary(record):
     notes = " · ".join(str(record[k]) for k in ("region", "scope", "date") if record.get(k))
     st.html(f"""
         <style>
-        .tea-recipe {{background:#f6f4e9;border:1px solid #d4ddcc;border-radius:18px;
-          color:#1d4132;padding:clamp(1rem,3vw,1.55rem);overflow-wrap:anywhere}}
-        .tea-recipe .tea-brand,.tea-recipe .tea-sub {{color:#506353;font-size:.88rem;line-height:1.6}}
+        .tea-recipe {{background:var(--guide-card);border:1px solid var(--guide-line);border-radius:4px;
+          color:var(--guide-ink);padding:clamp(1rem,3vw,1.55rem);overflow-wrap:anywhere}}
+        .tea-recipe .tea-brand,.tea-recipe .tea-sub {{color:var(--guide-muted);font-size:.88rem;line-height:1.6}}
         .tea-recipe .tea-head {{display:flex;justify-content:space-between;gap:1rem;align-items:center}}
-        .tea-recipe h3 {{margin:.2rem 0;padding:0;color:#173e2e;font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.2}}
+        .tea-recipe h3 {{margin:.2rem 0;padding:0;color:var(--guide-ink);font-size:clamp(1.5rem,4vw,2.2rem);line-height:1.2}}
         .tea-recipe .tea-grade {{text-align:center;background:#e3ebda;color:#25482d;min-width:4.8rem;
           padding:.46rem .65rem;border-radius:.85rem;line-height:1.4;font-size:.76rem}}
         .tea-recipe .tea-grade b {{display:block;font-size:1.55rem}}
         .tea-recipe .tea-grade[data-grade="C"],.tea-recipe .tea-grade[data-grade="D"]
           {{background:#f1e4ce;color:#66491b}}
         .tea-recipe dl {{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;
-          margin:1rem 0 .75rem;border-block:1px solid #d7dece;padding:.85rem 0}}
-        .tea-recipe dt {{font-size:.84rem;color:#4d6153}}
-        .tea-recipe dd {{margin:.15rem 0 0;color:#193f2e;font-size:1.8rem;font-weight:700;line-height:1.24;
+          margin:1rem 0 .75rem;border-block:1px dashed var(--guide-line);padding:.85rem 0}}
+        .tea-recipe dt {{font-size:.84rem;color:var(--guide-muted)}}
+        .tea-recipe dd {{margin:.15rem 0 0;color:var(--guide-ink);font-family:var(--guide-mono);font-size:1.8rem;font-weight:700;line-height:1.24;
           font-variant-numeric:tabular-nums}}
         .tea-recipe dd small,.tea-recipe .tea-unknown {{font-size:.94rem;font-weight:550}}
         .st-key-tea_sweetness_control [role="radiogroup"] {{display:flex;flex-wrap:wrap;gap:.5rem}}
-        .st-key-tea_sweetness_control [role="radiogroup"]>label {{margin:0;padding:.43rem .72rem;
-          min-height:40px;border:1px solid #cbd8c8;border-radius:9px;background:#fffdf7}}
-        .st-key-tea_sweetness_control [role="radiogroup"]>label:has(input:checked)
-          {{background:#e6efde;border-color:#608467;color:#193f2e}}
-        .st-key-tea_sweetness_control [role="radiogroup"]>label:focus-within {{outline:2px solid #245943;outline-offset:2px}}
+        .st-key-tea_sweetness_control [role="radiogroup"] label {{margin:0;padding:.43rem .72rem;
+          min-height:40px;border:1px solid var(--guide-line);border-radius:9px;background:var(--guide-card)}}
+        .st-key-tea_sweetness_control [role="radiogroup"] label:has(input:checked)
+          {{background:#f3e2e5;border-color:var(--guide-beet);color:var(--guide-ink)}}
+        .st-key-tea_sweetness_control [role="radiogroup"] label:focus-within {{outline:2px solid var(--guide-beet);outline-offset:2px}}
         </style>
         <section class="tea-recipe" aria-label="当前规格营养摘要"><div class="tea-head"><div>
         <div class="tea-brand">{escape(record['brand'])} · {escape(record.get('kind') or '现制茶饮')}</div>

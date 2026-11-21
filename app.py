@@ -6,7 +6,8 @@ from urllib.parse import urlsplit
 import pandas as pd
 import streamlit as st
 
-from guide_ui import home_entries, home_heading, masthead, portion_html
+from guide_ui import portion_html
+from market_layout import AREAS, area_heading, home_entries, home_heading, masthead
 from nutrition import (
     Basis, CATEGORIES, EXPLANATIONS, NUTRIENTS, FoodLabel, calculate_bmi, label_from_payload,
     portion_reference, review_food, scale_nutrients,
@@ -384,6 +385,13 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
         st.caption("如已有医生或营养师给出的饮食计划，份量与替代食物请按该计划安排。")
 
 
+def start_food_example():
+    st.session_state.update(food_area="预包装食品", work_route="单品解读", reading_focus="食用量与建议")
+    if st.session_state.get("single_product") is None:
+        sample = label_from_payload(DEMO_LABEL)
+        st.session_state.single_product = Product(sample, "示例", confirmed=sample)
+
+
 def start_tea_example():
     brand, name = "霸王茶姬", "伯牙绝弦"
     st.session_state.update({"food_area": "现制奶茶", "tea.route": "查一杯奶茶",
@@ -413,11 +421,15 @@ def main() -> None:
             home_entries()
         with st.container(key="quick_demo"):
             st.markdown("**手边没有照片？**")
-            st.button("试一杯伯牙绝弦", icon=":material/arrow_forward:", key="guide_demo", on_click=start_tea_example)
+            with st.container(horizontal=True):
+                food_action = "继续查看我的食品" if st.session_state.get("single_product") else "试读一瓶柠檬茶的标签"
+                st.button(food_action, key="guide_food_demo", type="primary", on_click=start_food_example)
+                st.button("试一杯伯牙绝弦", key="guide_demo", on_click=start_tea_example)
         return
     with st.container(key="area_switch"):
-        area = st.radio("选择食品专区", ["现制奶茶", "预包装食品"], key="food_area",
+        area = st.radio("选择食品专区", list(AREAS), key="food_area",
                         horizontal=True, label_visibility="collapsed", width="stretch")
+    area_heading(area)
     settings = VisionSettings(setting("LING_API_KEY"), setting("LING_BASE_URL", "https://api.ant-ling.com/v1"),
                               setting("LING_MODEL", "Ling-3.2-flash"),
                               direct_connection=setting("LING_DIRECT_CONNECTION").lower() == "true")

@@ -12,7 +12,14 @@ class GuideUITests(unittest.TestCase):
     def test_home_has_two_distinct_photos_inside_the_navigation_buttons(self):
         app = open_app(None)
         photos = set()
-        for key, area in (("enter_tea", "现制奶茶"), ("enter_food", "预包装食品")):
+        self.assertEqual([b.key for b in app.button if b.key in {"enter_food", "enter_tea"}],
+                         ["enter_food", "enter_tea"])
+        hero = next(n.proto.body for n in app.get("html") if '<header class="guide-intro">' in n.proto.body)
+        self.assertIn('src="app/static/supermarket-shelves.webp"', hero)
+        with Image.open(Path(__file__).resolve().parents[1] / "static/supermarket-shelves.webp") as photo:
+            photo.load()
+            self.assertGreater(photo.width, photo.height)
+        for key, area in (("enter_food", "预包装食品"), ("enter_tea", "现制奶茶")):
             button = app.button(key=key)
             self.assertIn(area, button.label)
             match = re.search(r"!\[[^\]]*\]\(app/(static/[\w-]+\.webp)\)", button.label)
@@ -26,6 +33,21 @@ class GuideUITests(unittest.TestCase):
             self.assertEqual(app.radio(key="food_area").value, area)
             app.button(key="guide_home").click().run()
         self.assertEqual(len(photos), 2)
+
+    def test_home_food_shortcut_shows_calculator_and_preserves_existing_item(self):
+        app = open_app(None)
+        app.button(key="guide_food_demo").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.radio(key="food_area").value, "预包装食品")
+        app.button(key="dose_half").click().run()
+        self.assertEqual(app.dataframe[0].value.loc["碳水化合物", "这次摄入"], "20 g")
+        app.button(key="manual").click().run()
+        current = app.session_state["single_product"]
+        app.button(key="guide_home").click().run()
+        self.assertEqual(app.button(key="guide_food_demo").label, "继续查看我的食品")
+        app.button(key="guide_food_demo").click().run()
+        self.assertEqual(app.session_state["single_product"].uid, current.uid)
+        self.assertIsNone(app.session_state["single_product"].confirmed)
 
     def test_home_example_switches_area_and_preserves_optional_profile_on_return(self):
         app = open_app(None)

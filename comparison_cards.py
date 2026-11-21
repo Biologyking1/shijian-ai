@@ -76,22 +76,22 @@ def pair_verdict(pair, weights, nutrition_title):
 
 _STYLE = """
 <style>
-.food-pair { background:#faf8f2; color:#203d31; border:1px solid #bdcdbd;
-  border-radius:16px; overflow:hidden; font-variant-numeric:tabular-nums; }
+.food-pair { background:var(--guide-card); color:var(--guide-ink); border:1px solid var(--guide-line);
+  border-radius:4px; overflow:hidden; font-variant-numeric:tabular-nums; }
 .food-pair table { table-layout:fixed; width:100%; border-collapse:collapse; margin:0; }
 .food-pair th,.food-pair td { width:50%; text-align:left; vertical-align:top;
   border:0; padding:.65rem clamp(.7rem,2vw,1.15rem); overflow-wrap:anywhere; }
-.food-pair thead th { background:#e6eee2; color:#205541; font-size:1.17rem;
-  font-family:var(--guide-serif,serif); font-weight:700; line-height:1.35; padding-block:1rem; }
-.food-pair th+th,.food-pair td+td { border-left:1px solid #cad6c8; }
-.food-pair th small,.food-pair td small { display:block; color:#4b6251; font-size:.8rem;
+.food-pair thead th { background:var(--guide-paper); color:var(--guide-ink); font-size:1.17rem;
+  font-family:var(--guide-sans); font-weight:700; line-height:1.35; padding-block:1rem; }
+.food-pair th+th,.food-pair td+td { border-left:1px solid var(--guide-line); }
+.food-pair th small,.food-pair td small { display:block; color:var(--guide-muted); font-size:.8rem;
   font-weight:500; line-height:1.45; }
 .food-pair th small { font-family:"PingFang SC","Microsoft YaHei",sans-serif; margin-top:.24rem; }
-.food-pair td { border-top:1px solid #dee5d9; font-weight:600; line-height:1.45; }
+.food-pair td { border-top:1px dashed var(--guide-line); font-weight:600; line-height:1.45; }
 .food-pair td small { margin-bottom:.14rem; }
-.food-pair tbody tr:last-child { color:#205541; background:#f2f5ec; }
+.food-pair tbody tr:last-child { color:var(--guide-ink); background:#f2e6e8; }
 .food-pair .food-pair-verdict { padding:.8rem clamp(.7rem,2vw,1.15rem); margin:0;
-  background:#205541; color:#fffdf8; font-size:.94rem; font-weight:600; line-height:1.55; }
+  background:var(--guide-beet); color:white; font-size:.94rem; font-weight:600; line-height:1.55; }
 </style>
 """
 

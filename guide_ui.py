@@ -1,28 +1,5 @@
 """Shared visual components for the food guide."""
 
-import streamlit as st
-
-
-def masthead():
-    st.html('<div class="guide-brand"><span class="guide-brand-leaf" aria-hidden="true"></span>'
-            '<span>食鉴 <b>AI</b></span></div>', width="content")
-
-
-def home_heading():
-    st.html('<header class="guide-intro"><h1>今天想查点<span>什么？</span></h1>'
-            '<p>选一杯奶茶，或翻看一张食品标签。</p></header>')
-
-
-def home_entries():
-    choices = (
-        ("enter_tea", "现制奶茶", "tea-cup.webp", "杯贴、订单或品牌营养卡，也可输入茶饮名称。"),
-        ("enter_food", "预包装食品", "packaged-food.webp", "食品包装、背标、价签或货架，也可手填标签。"),
-    )
-    for column, (key, area, photo, caption) in zip(st.columns(2), choices):
-        column.button(f"![](app/static/{photo}) **{area}** {caption}", key=key, width="stretch",
-                      on_click=st.session_state.update, args=({"food_area": area},))
-
-
 def portion_html(amount, unit, package_size, scaled):
     symbol = {"mL": "mL", "g": "g", "份": "份"}[unit]
     figure = ""
