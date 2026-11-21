@@ -161,11 +161,11 @@ def calculate_bmi(height_cm: float | None, weight_kg: float | None) -> float | N
 
 
 def portion_reference(label: FoodLabel) -> tuple[float, str] | None:
-    if label.basis is Basis.GRAMS:
+    if label.basis == Basis.GRAMS:
         return 100.0, "g"
-    if label.basis is Basis.MILLILITERS:
+    if label.basis == Basis.MILLILITERS:
         return 100.0, "mL"
-    if label.basis is Basis.SERVING:
+    if label.basis == Basis.SERVING:
         if label.serving_size and label.serving_unit:
             return label.serving_size, label.serving_unit
         return 1.0, "份"
@@ -178,7 +178,7 @@ def scale_nutrients(label: FoodLabel, portion: float, unit: str) -> dict[str, fl
     if amount is None or reference is None:
         raise ValueError("需要有效份量和标签标示口径。")
     reference_size, reference_unit = reference
-    if label.basis is Basis.SERVING and unit == "份":
+    if label.basis == Basis.SERVING and unit == "份":
         reference_size = 1.0
     elif unit != reference_unit:
         raise ValueError("食用量与营养标签的单位不一致。")

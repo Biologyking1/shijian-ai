@@ -6,7 +6,7 @@ from math import isfinite
 
 import streamlit as st
 
-from nutrition import NUTRIENTS, portion_reference, scale_nutrients
+import nutrition
 
 
 def _guess(title, question, options, answer, explanation, context):
@@ -27,7 +27,7 @@ def _amount(value):
 
 
 def portion_challenge(label, focus=()):
-    reference = portion_reference(label)
+    reference = nutrition.portion_reference(label)
     if not reference or not label.nutrients:
         return
     base, unit = reference
@@ -35,12 +35,12 @@ def portion_challenge(label, focus=()):
     quantity = label.package_size / 2 if half_pack else base * 2
     if quantity > 1_000_000:
         return
-    scaled = scale_nutrients(label, quantity, unit)
+    scaled = nutrition.scale_nutrients(label, quantity, unit)
     for nutrient in dict.fromkeys((*focus, "sugar", "carbs", "sodium", "energy", *label.nutrients)):
         value = scaled.get(nutrient)
         if value is None or not isfinite(value) or value < .002:
             continue
-        name, value_unit = NUTRIENTS[nutrient]
+        name, value_unit = nutrition.NUTRIENTS[nutrient]
         description = ("喝掉一半" if label.category == "drink" else "吃掉一半") if half_pack else "两倍标签份量"
         scenario = ("冲调后" if label.label_state == "prepared" else "") + f"{description}（{quantity:g} {unit}）"
         shown = [_amount(v) for v in (value, label.nutrients[nutrient], value / 2, value * 2)]

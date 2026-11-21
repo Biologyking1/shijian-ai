@@ -253,7 +253,7 @@ def portion_value(label: FoodLabel) -> tuple[float, str] | None:
     amount, unit = reference
     unit_label = UNIT_LABELS[unit]
     options = {f"标签标示份量 · {amount:g} {unit_label}": amount}
-    use_serving = label.basis is Basis.SERVING
+    use_serving = label.basis == Basis.SERVING
     if label.serving_size and label.serving_unit == unit and label.serving_size != amount:
         amount = label.serving_size
         options[f"包装标示的一份 · {amount:g} {unit_label}"] = amount

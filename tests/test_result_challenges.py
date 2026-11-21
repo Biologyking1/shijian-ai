@@ -1,4 +1,6 @@
 import unittest
+from dataclasses import replace
+from enum import Enum
 from unittest.mock import patch
 
 from nutrition import label_from_payload
@@ -49,6 +51,15 @@ class ResultChallengeTests(unittest.TestCase):
             portion_challenge(label_from_payload({**base, "nutrients": {"sugar": 4, "sodium": 12}}), ["sodium"])
             self.assertIn("钠", render.call_args.args[1])
             self.assertEqual(render.call_args.args[3], "30 mg")
+
+    def test_label_saved_before_a_module_reload_keeps_its_portion_question(self):
+        previous_basis = Enum("Basis", {"MILLILITERS": "per_100_ml"}, type=str)
+        label = label_from_payload({"basis": "per_100_ml", "label_state": "as_sold", "package_size": 500,
+                                    "package_unit": "mL", "nutrients": {"carbs": 8}})
+        with patch("result_challenges._guess") as render:
+            portion_challenge(replace(label, basis=previous_basis.MILLILITERS))
+            render.assert_called_once()
+            self.assertEqual(render.call_args.args[3], "20 g")
 
     def test_changing_sweetness_starts_a_new_guess_with_the_correct_difference(self):
         app = open_app(None)
