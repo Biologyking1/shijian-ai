@@ -1,18 +1,11 @@
 """Shared visual components for the food guide."""
 
-from functools import lru_cache
 from pathlib import Path
 
 import streamlit as st
 
 
-ASSETS = Path(__file__).parent / "ui_assets"
-
-
-@lru_cache(maxsize=1)
-def stylesheet():
-    css = (ASSETS / "guide.css").read_text(encoding="utf-8")
-    return "<style>" + css + "</style>"
+GUIDE_CSS = Path(__file__).parent / "ui_assets" / "guide.css"
 
 
 def masthead():
