@@ -11,8 +11,11 @@ from streamlit.testing.v1 import AppTest
 from test_vision import image_bytes
 
 
-def open_app():
-    return AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"), default_timeout=15).run()
+def open_app(area="预包装食品"):
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"), default_timeout=15).run()
+    if area is not None:
+        app.radio(key="food_area").set_value(area).run()
+    return app
 
 
 class AppTests(unittest.TestCase):

@@ -66,8 +66,8 @@ def share_app(url: str) -> None:
 
 
 def profile() -> tuple[set[str], int | None, float | None]:
-    st.header("1. 填写个人信息")
-    st.caption("所有问题均可跳过。答案仅用于当前会话的展示，不随照片发送给模型。")
+    st.header("个人信息（选填）")
+    st.caption("愿意填写时，请按实际情况选择，方便我们提醒你关注相关成分。也可以直接选择下方入口。个人信息仅用于本次会话。")
     answers = st.session_state.setdefault("personal_answers", {})
     for key, saved in answers.items():
         if key not in st.session_state:
@@ -369,16 +369,29 @@ def show_review(label: FoodLabel, flags: set[str], age: int | None, bmi: float |
 def main() -> None:
     st.set_page_config(page_title="食鉴 AI", page_icon="🥗", layout="centered")
     st.title("食鉴 AI")
-    route = st.radio("这次想做什么？", ["单品解读", "多款比较", "货架购物助手"], horizontal=True, key="work_route",
-                     captions=["看懂标签，换算食用量", "比较价格、营养和口味", "按预算从现场候选中选购"])
     share_app(setting("PUBLIC_APP_URL"))
+    flags, age, bmi = profile()
     prefs = profile_panel()
+    st.header("选择食品类型")
+    packaged, tea = st.columns(2)
+    packaged.markdown("**预包装食品**")
+    packaged.caption("只接收预包装商品的包装、背标、价签或货架照片，以及对应的商品描述。")
+    tea.markdown("**现制奶茶**")
+    tea.caption("只接收现制茶饮的杯贴、订单或品牌营养卡，以及对应的品牌、品名和点单规格。")
+    area = st.radio("进入哪个专区？", ["预包装食品", "现制奶茶"], index=None, horizontal=True, key="food_area")
+    if area is None:
+        return
     settings = VisionSettings(setting("LING_API_KEY"), setting("LING_BASE_URL", "https://api.ant-ling.com/v1"),
                               setting("LING_MODEL", "Ling-3.2-flash"),
                               direct_connection=setting("LING_DIRECT_CONNECTION").lower() == "true")
+    if area == "现制奶茶":
+        from tea_views import tea_home
+        tea_home(settings, prefs, flags)
+        return
+    route = st.radio("预包装食品 · 选择功能", ["单品解读", "多款比较", "货架购物助手"], horizontal=True, key="work_route",
+                     captions=["看懂标签，换算食用量", "比较价格、营养和口味", "按预算从现场候选中选购"])
     basket = st.session_state.setdefault("basket", {})
     if route == "单品解读":
-        flags, age, bmi = profile()
         label_input(settings)
         item = st.session_state.get("single_product")
         if item is None:

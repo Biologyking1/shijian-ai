@@ -1,0 +1,30 @@
+<section aria-label="茶饮账本">
+  <div class="summary">
+    <div><span>累计结余</span><strong id="balance">—</strong></div>
+    <div><span>所选月支出</span><strong id="expense">—</strong></div>
+    <div><span>所选月收入</span><strong id="income">—</strong></div>
+  </div>
+  <p role="status" aria-live="polite" id="status">正在读取本机账本…</p>
+  <form>
+    <fieldset disabled>
+      <legend>记一笔</legend>
+      <button type="button" id="draft" hidden>带入刚才的点单</button>
+      <div class="inputs">
+        <label>收支类型<select id="kind"><option value="expense">茶饮支出</option><option value="income">收入／退款</option></select></label>
+        <label><span id="amount-label">实付金额（元）</span><input id="amount" inputmode="decimal" required placeholder="0.00" autocomplete="off"></label>
+        <label>日期<input id="date" type="date" required></label>
+        <label class="wide">备注（选填）<input id="note" maxlength="160" placeholder="例如：品牌、饮品或收入来源" autocomplete="off"></label>
+      </div>
+      <button class="primary" type="submit">保存这笔收支</button>
+    </fieldset>
+  </form>
+  <div class="month-heading"><h4>每月明细</h4><label>月份<input type="month" id="month"></label></div>
+  <p id="month-summary"></p>
+  <ul id="entries" aria-label="所选月收支"></ul>
+  <button type="button" id="more" hidden>显示更多记录</button>
+  <details><summary>备份与恢复</summary>
+    <p>备份包含每笔收支和备注，请自行保管。导入会合并新记录，重复导入同一备份只计入一次。</p>
+    <div class="backup"><button id="export" type="button" disabled>导出 JSON 备份</button>
+    <label>导入 JSON 备份<input id="import" type="file" accept=".json,application/json" disabled></label></div>
+  </details>
+</section>

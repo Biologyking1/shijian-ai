@@ -1,0 +1,32 @@
+:host { color: var(--st-text-color, #182c23); font-family: var(--st-font, sans-serif); }
+* { box-sizing: border-box; }
+section { max-width: 100%; }
+.summary, .inputs { display: grid; gap: .8rem; }
+.summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.summary div { border-radius: .55rem; padding: .75rem; background: var(--st-secondary-background-color, #eef5ef); }
+strong { display: block; overflow-wrap: anywhere; font-size: clamp(1rem, 2vw, 1.45rem); }
+.summary span, label, p { font-size: .88rem; }
+label { display: flex; flex-direction: column; gap: .25rem; }
+fieldset { margin: 0; padding: .85rem 1rem 1rem; border: 1px solid #80988977; border-radius: .55rem; }
+legend, h4 { font-size: 1rem; font-weight: 650; padding: 0 .2rem; }
+.inputs { grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); }
+.wide { grid-column: 1 / -1; }
+input, select, button { font: inherit; padding: .45rem .65rem; border: 1px solid #80988999; border-radius: .45rem; background: var(--st-background-color, white); color: inherit; min-width: 0; }
+button, summary { cursor: pointer; }
+button:disabled { opacity: .6; cursor: default; }
+button.primary { background: var(--st-primary-color, #255f49); color: white; margin-top: .8rem; font-weight: 600; }
+#draft { margin: 0 0 .65rem; }
+#status { margin: .65rem 0; }
+#status:empty { margin: .5rem; }
+.month-heading, .backup { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
+.month-heading { margin-top: 1rem; }
+.month-heading label { flex-direction: row; align-items: center; }
+h4 { margin: 0; padding: 0; }
+#entries { padding: 0; margin: .5rem 0; list-style: none; }
+#entries li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .3rem .75rem; padding: .5rem 0; border-top: 1px solid #80988944; }
+.entry-info { min-width: 0; flex: 1 1 9rem; overflow-wrap: anywhere; white-space: pre-wrap; }
+.entry-date { display: block; font-size: .78rem; }
+.remove { font-size: .8rem; }
+details { margin-top: 1.1rem; }
+.backup { justify-content: flex-start; }
+.backup label { max-width: 100%; }

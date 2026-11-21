@@ -51,7 +51,7 @@ def profile_panel() -> dict:
                     _set_profile_widgets(imported)
                     st.success("已应用文件中的选购偏好。")
 
-        budget = st.number_input("一包最多花多少元？", min_value=0.0, max_value=1_000_000.0, value=None,
+        budget = st.number_input("单件食品或单杯茶饮最多花多少元？", min_value=0.0, max_value=1_000_000.0, value=None,
                                  step=0.1, placeholder="不限", key=_widget("budget", prefs["budget"]))
         goals = st.multiselect("希望优先满足哪些营养目标？", list(GOALS), format_func=lambda k: GOALS[k][0],
                                key=_widget("goals", prefs["goals"]), placeholder="选填")
@@ -68,7 +68,7 @@ def profile_panel() -> dict:
         ref_price = prefs["reference_price"]
         if st.checkbox("调整评分参考值", key="shopping.scales.open"):
             st.caption("所填参考值对应单项 50 分，用于表达购物偏好。营养数量按每 100 g 或每 100 mL 计算。")
-            ref_price = st.number_input("单包价格参考值（元）", min_value=0.01, max_value=1_000_000.0,
+            ref_price = st.number_input("单件价格参考值（元）", min_value=0.01, max_value=1_000_000.0,
                                         step=0.1, key=_widget("reference_price", float(ref_price)))
             for goal in goals:
                 title, unit = NUTRIENTS[goal]
