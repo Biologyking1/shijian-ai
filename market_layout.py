@@ -1,5 +1,7 @@
 """Page headings and category navigation for the shopping guide."""
 
+from pathlib import Path
+
 import streamlit as st
 
 
@@ -14,6 +16,12 @@ def masthead():
             '<span>食鉴 <b>AI</b></span></div>', width="content")
 
 
+@st.dialog("食鉴 AI 使用演示")
+def show_demo_video():
+    with st.container(key="guide_video_player"):
+        st.video(Path(__file__).parent / "media" / "site-walkthrough.mp4")
+
+
 def home_heading():
     st.html("""
         <header class="guide-intro">
@@ -26,6 +34,8 @@ def home_heading():
         </header>
         <p class="guide-welcome">站在货架前，两款零食该选哪款？拍下包装，读懂配料，看看「低糖」的说法有没有标签支持。选好份量，算算吃进去多少，再按预算和口味比较。想喝奶茶时，也能换个甜度看每杯能量差多少，把实付金额记进茶饮账本。</p>
     """)
+    if st.button("观看使用演示 · 2分34秒", icon=":material/play_circle:", key="guide_video"):
+        show_demo_video()
 
 
 def home_entries():

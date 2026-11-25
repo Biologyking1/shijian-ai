@@ -9,6 +9,14 @@ from test_app import open_app
 
 
 class GuideUITests(unittest.TestCase):
+    def test_home_video_only_loads_after_opening_the_demos_dialog(self):
+        app = open_app(None)
+        self.assertFalse(app.get("video"))
+        app.button(key="guide_video").click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(len(app.get("video")), 1)
+        self.assertFalse(app.get("video")[0].proto.autoplay)
+
     def test_home_has_two_distinct_photos_inside_the_navigation_buttons(self):
         app = open_app(None)
         photos = set()
